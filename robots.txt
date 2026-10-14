@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ward00al-khatib.github.io/sitemap.xml
