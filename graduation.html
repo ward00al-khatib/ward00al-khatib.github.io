@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en" dir="ltr" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>WALL-E Junior · Ward Alkhatib</title>
+<meta name="description" content="WALL-E Junior: an autonomous tracked robot that finds waste, classifies it with YOLOv8 and sorts it with a 5-DOF arm. Graduation project, Homs University, 2025–2026.">
+<meta property="og:title" content="WALL-E Junior · Ward Alkhatib">
+<meta property="og:description" content="WALL-E Junior: an autonomous tracked robot that finds waste, classifies it with YOLOv8 and sorts it with a 5-DOF arm. Graduation project, Homs University, 2025–2026.">
+<meta property="og:image" content="img/walle-front.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2316202E'/%3E%3Ccircle cx='11' cy='12' r='5' fill='%23E8862B'/%3E%3Ccircle cx='21' cy='12' r='5' fill='%23E8862B'/%3E%3Crect x='8' y='19' width='16' height='9' rx='1.5' fill='%23D7A85E'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&family=Noto+Kufi+Arabic:wght@600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<script>
+/* pick the language before the page paints: #ar / #en link, then the visitor's last choice, then the browser language */
+(function(){
+  var l = "en";
+  try { var s = localStorage.getItem("wa-lang"); if (s === "ar" || s === "en") l = s;
+        else if ((navigator.languages || [navigator.language || ""]).some(function(x){ return /^ar\b/i.test(x); })) l = "ar"; } catch (e) {}
+  if (location.hash === "#ar") l = "ar"; else if (location.hash === "#en") l = "en";
+  var r = document.documentElement; r.setAttribute("data-lang", l); r.lang = l; r.dir = l === "ar" ? "rtl" : "ltr";
+})();
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap wide">
+    <a class="mark" href="index.html" aria-label="Ward Alkhatib, home"><i></i>WA</a>
+    <nav class="nav" aria-label="Pages">
+      <a href="community.html"><span class="en">Community</span><span class="ar">المجتمع</span></a>
+      <a href="competitions.html"><span class="en">Competitions</span><span class="ar">المسابقات</span></a>
+      <a href="teaching.html"><span class="en">Teaching</span><span class="ar">التعليم</span></a>
+      <a href="graduation.html" aria-current="page"><span class="en">Graduation</span><span class="ar">التخرج</span></a>
+      <a href="university.html"><span class="en">University</span><span class="ar">الجامعة</span></a>
+      <a href="side-projects.html"><span class="en">Side projects</span><span class="ar">مشاريع جانبية</span></a>
+      <a href="awards.html"><span class="en">Awards</span><span class="ar">الجوائز</span></a>
+    </nav>
+    <details class="menu">
+      <summary><span class="en">Menu</span><span class="ar">القائمة</span></summary>
+      <nav class="menu-panel" aria-label="Pages">
+        <a href="index.html"><span class="en">Home</span><span class="ar">الرئيسية</span></a>
+        <a href="community.html"><span class="en">Community work</span><span class="ar">العمل المجتمعي</span></a>
+        <a href="competitions.html"><span class="en">Competition coaching</span><span class="ar">تدريب فرق المسابقات</span></a>
+        <a href="teaching.html"><span class="en">Teaching and courses</span><span class="ar">التعليم والكورسات</span></a>
+        <a href="graduation.html" aria-current="page"><span class="en">Graduation project</span><span class="ar">مشروع التخرج</span></a>
+        <a href="university.html"><span class="en">University projects</span><span class="ar">المشاريع الجامعية</span></a>
+        <a href="side-projects.html"><span class="en">Side projects</span><span class="ar">المشاريع الجانبية</span></a>
+        <a href="awards.html"><span class="en">Achievements and awards</span><span class="ar">الإنجازات والجوائز</span></a>
+      </nav>
+    </details>
+    <a class="call" href="index.html#contact"><span class="en">Contact</span><span class="ar">تواصل</span> <span class="arr" aria-hidden="true">↗</span></a>
+    <button class="lang" id="lang-toggle" type="button"><span class="en" lang="ar">العربية</span><span class="ar" lang="en">English</span></button>
+  </div>
+</header>
+
+<main id="top">
+<div class="page-head">
+  <div class="wrap">
+    <p class="crumb"><a href="index.html"><span class="en">Home</span><span class="ar">الرئيسية</span></a><span aria-hidden="true">/</span><span class="en">WALL-E Junior</span><span class="ar">WALL-E Junior</span></p>
+    <p class="eyebrow"><span class="en">Graduation project · Homs University · 2025–2026</span><span class="ar">مشروع التخرج · جامعة حمص · 2025–2026</span></p>
+    <h1 class="page-title"><span class="en">WALL-E Junior</span><span class="ar">WALL-E Junior</span></h1>
+    <p class="page-lead"><span class="en">Autonomous robotic system for waste sorting using a robotic arm, computer vision and deep learning.</span><span class="ar">نظام روبوتي ذاتي القيادة لفرز النفايات باستخدام ذراع روبوتية وتقنيات الرؤية الحاسوبية والتعلم العميق.</span></p>
+    <div class="cta"><a class="btn primary" href="index.html#top"><span class="en">Try the 3D model</span><span class="ar">جرّب النموذج ثلاثي الأبعاد</span><svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></div>
+  </div>
+</div>
+<section id="project">
+  <div class="wrap">
+    <div class="proj">
+      <figure class="proj-main">
+        <img src="img/walle-graduation.jpg" width="1050" height="1400" loading="lazy" alt="WALL-E Junior wearing a graduation cap and sash in front of the engineering faculty" data-ar-alt="WALL-E Junior بقبعة ووشاح التخرج أمام كلية الهندسة">
+        <figcaption><span class="en">Graduation day, Faculty of Mechanical and Electrical Engineering</span><span class="ar">يوم التخرج، كلية الهندسة الميكانيكية والكهربائية</span></figcaption>
+      </figure>
+      <div>
+        <div class="proj-intro">
+          <p><span class="en">Sorting waste at the source still depends almost entirely on people, which makes it slow and inconsistent. WALL-E Junior is our answer: a tracked robot that searches an indoor space for waste, recognises each item with a YOLOv8 model, picks it up with a 5-DOF arm and drops it into the matching bin, with no one stepping in.</span><span class="ar">ما زال فرز النفايات عند المصدر يعتمد بالكامل تقريباً على الإنسان، فيأتي بطيئاً وغير متّسق. WALL-E Junior هو حلّنا: روبوت على جنازير يجوب مكاناً داخلياً بحثاً عن النفايات، يتعرّف على كل جسم بنموذج YOLOv8، ثم يلتقطه بذراع خماسية درجات الحرية ويضعه في الحاوية المطابقة، دون تدخّل بشري.</span></p>
+          <p><span class="en">We gave it the look of the film robot on purpose. A friendly shape turns a technical task into something children want to watch, so the robot works as a small campaign for recycling as well as a machine. It was a team project of four students in the Mechatronics Department.</span><span class="ar">اخترنا له شكل روبوت الفيلم عن قصد، فالشكل المحبّب يحوّل مهمة تقنية إلى شيء يحب الأطفال مشاهدته، فيصبح الروبوت حملة صغيرة لإعادة التدوير إلى جانب كونه آلة. نفّذنا المشروع فريقاً من أربعة طلاب في قسم الميكاترونيك.</span></p>
+        </div>
+        <div class="role">
+          <p class="label"><span class="en">My part in the team</span><span class="ar">دوري في الفريق</span></p>
+          <ul>
+            <li><b><span class="en">Computer vision</span><span class="ar">الرؤية الحاسوبية</span></b><span><span class="en">The YOLOv8 model that detects the waste and sorts it into four classes, running on the Raspberry Pi 5.</span><span class="ar">نموذج YOLOv8 الذي يكتشف النفايات ويصنّفها إلى أربع فئات، ويعمل على Raspberry Pi 5.</span></span></li>
+            <li><b><span class="en">Arm design</span><span class="ar">تصميم الذراع</span></b><span><span class="en">The 5-DOF arm, from the parts to the full assembly in SolidWorks.</span><span class="ar">الذراع خماسية درجات الحرية، من القطع حتى التجميع الكامل على SolidWorks.</span></span></li>
+            <li><b><span class="en">Robot design</span><span class="ar">تصميم الروبوت</span></b><span><span class="en">The body and overall layout of the robot in SolidWorks.</span><span class="ar">جسم الروبوت وتوزيع مكوّناته على SolidWorks.</span></span></li>
+          </ul>
+        </div>
+        <div class="classes">
+          <span class="label"><span class="en">Sorts into</span><span class="ar">يفرز إلى</span></span>
+          <span class="cls"><i class="k-plastic"></i><span class="en">Plastic</span><span class="ar">بلاستيك</span></span>
+          <span class="cls"><i class="k-paper"></i><span class="en">Paper</span><span class="ar">ورق</span></span>
+          <span class="cls"><i class="k-metal"></i><span class="en">Metal</span><span class="ar">معدن</span></span>
+          <span class="cls"><i class="k-glass"></i><span class="en">Glass</span><span class="ar">زجاج</span></span>
+        </div>
+        <ol class="parts">
+          <li><span class="balloon">1</span><div><b><span class="en">Robotic arm</span><span class="ar">الذراع الروبوتية</span></b><p><span class="en">5-DOF arm designed in SolidWorks, driven by six MG996R servos (five joints and the gripper) through a PCA9685 board. Bearings at the base and shoulder joints take the load off the servo shafts.</span><span class="ar">ذراع خماسية درجات الحرية صُمّمت على SolidWorks، تحرّكها ستة محركات سيرفو MG996R (خمسة للمفاصل وواحد للملقط) عبر لوحة PCA9685. وأُضيفت رولمانات لمفصلَي القاعدة والكتف لتخفيف الحمل عن أعمدة المحركات.</span></p></div></li>
+          <li><span class="balloon">2</span><div><b><span class="en">Gripper and metal check</span><span class="ar">الملقط والتحقق من المعدن</span></b><p><span class="en">Two-jaw gripper with an LJ12A3-4-Z/BX inductive sensor between the jaws. When the camera calls an item metal, the sensor has to confirm it once the jaws close.</span><span class="ar">ملقط بفكّين بينهما حساس تقارب حثّي LJ12A3-4-Z/BX. عندما تصنّف الكاميرا الجسم معدناً، يجب أن يؤكّده الحساس بعد إغلاق الفكّين.</span></p></div></li>
+          <li><span class="balloon">3</span><div><b><span class="en">Compute and vision</span><span class="ar">الحوسبة والرؤية</span></b><p><span class="en">A Raspberry Pi 5 (4 GB) runs ROS 2 and a YOLOv8 Medium model on frames from a Pi Camera Module 3 on the lower shelf, in the middle of the motor deck, looking out through the front. An Arduino UNO drives the motors, servos and sensor over USB serial.</span><span class="ar">يشغّل Raspberry Pi 5 (4 GB) نظام ROS 2 ونموذج YOLOv8 Medium على صور كاميرا Pi Camera Module 3 مثبّتة على الرف السفلي في منتصف رف المحركات، تنظر إلى الأمام. ويتولّى Arduino UNO المحركات والسيرفو والحساس عبر اتصال تسلسلي USB.</span></p></div></li>
+          <li><span class="balloon">4</span><div><b><span class="en">Drive</span><span class="ar">نظام الحركة</span></b><p><span class="en">Tracks built from bicycle chains and sprockets with bolted tread plates, turned by four 12 V, 100 rpm gear motors (two per side) through two IBT-2 (BTS7960B) drivers, with an encoder and a PID speed loop on each side.</span><span class="ar">جنازير مبنية من سلاسل وتروس دراجات هوائية مع دواسات مثبّتة بالبراغي، تديرها أربعة محركات 12 فولت و100 دورة/دقيقة مع علب تخفيض (اثنان لكل جهة) عبر قيادتين IBT-2 (BTS7960B)، مع مشفّر وحلقة تحكم PID بالسرعة لكل جهة.</span></p></div></li>
+          <li><span class="balloon">5</span><div><b><span class="en">Body and power</span><span class="ar">الهيكل والطاقة</span></b><p><span class="en">A wooden body chosen for cost, with higher-torque motors to carry its weight. Two separate Li-ion packs, each with its own BMS: 2S for the logic (5 V, 5 A) and 3S2P (about 11.1 V) for the motors and servo supplies. An aluminium plate shields the Pi from motor-driver interference.</span><span class="ar">هيكل خشبي اختير لانخفاض كلفته، مع محركات بعزم أعلى لحمل وزنه. حزمتا بطاريات ليثيوم منفصلتان لكلٍّ منهما وحدة BMS: حزمة 2S للدارات المنطقية (5 فولت، 5 أمبير) وحزمة 3S2P (نحو 11.1 فولت) للمحركات وتغذية السيرفو. وتحمي صفيحة ألمنيوم الـ Raspberry Pi من تشويش قيادات المحركات.</span></p></div></li>
+        </ol>
+      </div>
+    </div>
+
+    <h3 class="sub-h"><span class="en">Test results</span><span class="ar">نتائج الاختبار</span></h3>
+    <p class="sub-intro"><span class="en">Measured on the assembled robot: one run of 20 mixed items on a 4 m² working area.</span><span class="ar">قِيست على الروبوت بعد تجميعه: تجربة على 20 قطعة متنوعة في مساحة عمل 4 م².</span></p>
+    <div class="results">
+      <div class="kpi">
+        <span class="k-label"><span class="en">Classified correctly</span><span class="ar">تصنيف صحيح</span></span>
+        <b class="k-value ltr">19/20</b>
+        <div class="meter" role="img" aria-label="95%"><i style="--v:95%"></i></div>
+        <span class="k-note">95%</span>
+      </div>
+      <div class="kpi">
+        <span class="k-label"><span class="en">Picked up successfully</span><span class="ar">التقاط ناجح</span></span>
+        <b class="k-value ltr">12/20</b>
+        <div class="meter" role="img" aria-label="60%"><i style="--v:60%"></i></div>
+        <span class="k-note">60%</span>
+      </div>
+      <div class="kpi">
+        <span class="k-label"><span class="en">Placed in the correct bin</span><span class="ar">وُضعت في الحاوية الصحيحة</span></span>
+        <b class="k-value ltr">10/12</b>
+        <div class="meter" role="img" aria-label="83%"><i style="--v:83%"></i></div>
+        <span class="k-note"><span class="en">83% of the items picked up</span><span class="ar">83% من القطع التي التُقطت</span></span>
+      </div>
+      <div class="kpi">
+        <span class="k-label"><span class="en">Time for the whole test</span><span class="ar">مدة الاختبار كاملاً</span></span>
+        <b class="k-value"><span class="en">8 min</span><span class="ar">8 دقائق</span></b>
+        <span class="k-note"><span class="en">20 items, about 24 s each</span><span class="ar">20 قطعة، نحو 24 ثانية لكل قطعة</span></span>
+      </div>
+    </div>
+    <div class="testmix">
+      <p class="label"><span class="en">The 20 test items</span><span class="ar">قطع الاختبار العشرون</span></p>
+      <div class="units" role="img" aria-label="5 metal, 2 plastic, 5 cardboard, 5 paper, 3 glass">
+        <div class="ugroup"><div class="uboxes" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div><span><span class="en">Metal</span><span class="ar">معدن</span> <b class="ltr">5</b></span></div>
+        <div class="ugroup"><div class="uboxes" aria-hidden="true"><i></i><i></i></div><span><span class="en">Plastic</span><span class="ar">بلاستيك</span> <b class="ltr">2</b></span></div>
+        <div class="ugroup"><div class="uboxes" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div><span><span class="en">Cardboard</span><span class="ar">كرتون</span> <b class="ltr">5</b></span></div>
+        <div class="ugroup"><div class="uboxes" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div><span><span class="en">Paper</span><span class="ar">ورق</span> <b class="ltr">5</b></span></div>
+        <div class="ugroup"><div class="uboxes" aria-hidden="true"><i></i><i></i><i></i></div><span><span class="en">Glass</span><span class="ar">زجاج</span> <b class="ltr">3</b></span></div>
+      </div>
+    </div>
+    <dl class="specsheet">
+      <div><dt><span class="en">Size (W × D × H)</span><span class="ar">الأبعاد (عرض × عمق × ارتفاع)</span></dt><dd><span class="en">50 × 45 × 65 cm</span><span class="ar">50 × 45 × 65 سم</span></dd></div>
+      <div><dt><span class="en">Arm reach</span><span class="ar">مدى وصول الذراع</span></dt><dd><span class="en">30 cm in front of the robot</span><span class="ar">30 سم أمام الروبوت</span></dd></div>
+      <div><dt><span class="en">Heaviest item it can pick</span><span class="ar">أثقل جسم يمكن التقاطه</span></dt><dd><span class="en">200 g</span><span class="ar">200 غ</span></dd></div>
+      <div><dt><span class="en">Battery</span><span class="ar">البطارية</span></dt><dd><span class="en">20 min of active work, or 12 h searching and idle</span><span class="ar">20 دقيقة عمل فعلي، أو 12 ساعة في حالة البحث والسكون</span></dd></div>
+    </dl>
+
+    <h3 class="sub-h"><span class="en">How it works</span><span class="ar">دورة العمل</span></h3>
+    <p class="sub-intro"><span class="en">A ROS 2 task manager runs the whole job as a state machine: one item per cycle, then it starts again.</span><span class="ar">يدير مدير مهام على ROS 2 العمل كلّه كآلة حالات: جسم واحد في كل دورة، ثم تبدأ الدورة من جديد.</span></p>
+    <ol class="cycle">
+      <li><code>SEARCHING</code><span><span class="en">Drives and scans for waste</span><span class="ar">يتجوّل ويبحث عن النفايات</span></span></li>
+      <li><code>DETECTED</code><span><span class="en">Locates the item on the floor</span><span class="ar">يحدّد موضع الجسم على الأرض</span></span></li>
+      <li><code>REPOSITIONING</code><span><span class="en">Turns in place, then drives straight</span><span class="ar">يستدير في مكانه ثم يتقدّم مستقيماً</span></span></li>
+      <li><code>STOPPED</code><span><span class="en">Halts before the arm moves</span><span class="ar">يتوقف قبل أن تتحرك الذراع</span></span></li>
+      <li><code>GRASPING</code><span><span class="en">Inverse kinematics, then the pick</span><span class="ar">حركية عكسية ثم الالتقاط</span></span></li>
+      <li><code>VERIFYING_METAL</code><span><span class="en">Sensor confirms a "metal" call</span><span class="ar">الحساس يؤكّد تصنيف «معدن»</span></span></li>
+      <li><code>SORTING</code><span><span class="en">Drops it in the matching bin</span><span class="ar">يضعه في الحاوية المطابقة</span></span></li>
+      <li><code>RETURNING</code><span><span class="en">Back to the ready pose</span><span class="ar">يعود إلى وضعية الاستعداد</span></span></li>
+    </ol>
+    <p class="cycle-note"><span class="en">Two more states handle exceptions. If the sensor rejects "metal", <code>RECLASSIFYING</code> takes the next most likely class from the same YOLO output, or sends the item back to the search. Any error or timeout enters <code>FAULT</code>, which stops all motion at once.</span><span class="ar">حالتان إضافيتان للاستثناءات: إذا رفض الحساس تصنيف «معدن» تأخذ <code>RECLASSIFYING</code> الفئة الأعلى احتمالاً التالية من مخرجات YOLO نفسها، أو تعيد الجسم إلى البحث. وأي عطل أو انتهاء مهلة يدخل <code>FAULT</code> التي توقف كل حركة فوراً.</span></p>
+
+    <h3 class="sub-h"><span class="en">System architecture</span><span class="ar">بنية النظام</span></h3>
+    <div class="arch">
+      <div class="arch-box">
+        <p class="label"><span class="en">High level · ROS 2</span><span class="ar">المستوى العالي · ROS 2</span></p>
+        <b>Raspberry Pi 5</b>
+        <ul>
+          <li><code>Vision</code><span><span class="en">YOLOv8 Medium, 640 × 640, four classes</span><span class="ar">YOLOv8 Medium بدقة 640 × 640، أربع فئات</span></span></li>
+          <li><code>Localization</code><span><span class="en">Pixel ray to a floor point, then to the robot frame</span><span class="ar">من البكسل إلى نقطة على الأرض ثم إلى إطار الروبوت</span></span></li>
+          <li><code>Task Manager</code><span><span class="en">Runs the state machine above</span><span class="ar">يشغّل آلة الحالات أعلاه</span></span></li>
+          <li><code>Motion Controller</code><span><span class="en">Turn and drive commands</span><span class="ar">أوامر الدوران والتقدّم</span></span></li>
+          <li><code>Arm Controller</code><span><span class="en">Denavit–Hartenberg model and inverse kinematics</span><span class="ar">نموذج دينافيت–هارتنبرغ والحركية العكسية</span></span></li>
+          <li><code>Metal Sensor Decision</code><span><span class="en">Confirms or rejects "metal"</span><span class="ar">تأكيد تصنيف «معدن» أو رفضه</span></span></li>
+          <li><code>Arduino Comm</code><span><span class="en">Frames the serial messages</span><span class="ar">تأطير الرسائل التسلسلية</span></span></li>
+        </ul>
+        <p class="arch-in"><span class="en">Input: Pi Camera Module 3</span><span class="ar">الدخل: Pi Camera Module 3</span></p>
+      </div>
+      <div class="arch-link" aria-hidden="true"><span>USB serial</span></div>
+      <div class="arch-box">
+        <p class="label"><span class="en">Low level · no ROS</span><span class="ar">المستوى المنخفض · دون ROS</span></p>
+        <b>Arduino UNO</b>
+        <ul>
+          <li><code>Tracks</code><span><span class="en">PID per side, 2 encoders, 2× IBT-2 to 4 DC gear motors</span><span class="ar">PID لكل جهة، مشفّران، وقيادتا IBT-2 لأربعة محركات DC</span></span></li>
+          <li><code>Arm</code><span><span class="en">PCA9685 over I²C to 6× MG996R</span><span class="ar">PCA9685 عبر I²C لستة محركات MG996R</span></span></li>
+          <li><code>Sensor</code><span><span class="en">LJ12A3-4-Z/BX inductive, NPN output</span><span class="ar">حساس حثّي LJ12A3-4-Z/BX بمخرج NPN</span></span></li>
+        </ul>
+        <p class="label arch-pw"><span class="en">Power</span><span class="ar">الطاقة</span></p>
+        <ul>
+          <li><code>2S + BMS</code><span><span class="en">5 V, 5 A for the Pi and the Arduino</span><span class="ar">5 فولت، 5 أمبير للـ Pi والـ Arduino</span></span></li>
+          <li><code>3S2P + BMS</code><span><span class="en">About 11.1 V to the motor drivers, plus two 6 V, 8 A buck converters for the servos</span><span class="ar">نحو 11.1 فولت لقيادات المحركات، ومحوّلان خافضان 6 فولت، 8 أمبير للسيرفو</span></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="sub-h"><span class="en">From CAD <em>to</em> robot</span><span class="ar">من التصميم <em>إلى</em> التنفيذ</span></h3>
+    <p class="sub-intro"><span class="en">The arm went from a SolidWorks assembly to the finished part. The tracks were built by hand from bicycle chains and sprockets.</span><span class="ar">انتقلت الذراع من تجميع على SolidWorks إلى قطعة منفّذة، وبُنيت الجنازير يدوياً من سلاسل دراجات هوائية ومسنّناتها.</span></p>
+    <div class="build">
+      <figure><img class="cad" src="img/cad-arm.jpg" width="460" height="525" loading="lazy" alt="The 5-DOF arm assembly in SolidWorks" data-ar-alt="تجميع الذراع خماسية درجات الحرية على SolidWorks"><figcaption><span><span class="en">Arm assembly in SolidWorks</span><span class="ar">تجميع الذراع على SolidWorks</span></span><span class="tag"><span class="en">CAD</span><span class="ar">تصميم</span></span></figcaption></figure>
+      <figure><img class="fit" src="img/arm-built.jpg" width="736" height="1100" loading="lazy" alt="The finished arm standing upright on its base" data-ar-alt="الذراع بعد التنفيذ قائمة على قاعدتها"><figcaption><span><span class="en">The arm, built and assembled</span><span class="ar">الذراع بعد التنفيذ والتجميع</span></span><span class="tag"><span class="en">Build</span><span class="ar">تنفيذ</span></span></figcaption></figure>
+      <figure><img class="fit" src="img/arm-side.jpg" width="1053" height="702" loading="lazy" alt="Side view of the arm with the gripper and wrist servos" data-ar-alt="منظر جانبي للذراع مع الملقط ومحركات المعصم"><figcaption><span><span class="en">Gripper and wrist servos</span><span class="ar">الملقط ومحركات المعصم</span></span><span class="tag"><span class="en">Build</span><span class="ar">تنفيذ</span></span></figcaption></figure>
+      <figure><img src="img/build-sprocket.jpg" width="640" height="623" loading="lazy" alt="A bicycle sprocket mounted on a bearing" data-ar-alt="مسنّن دراجة مركّب على رولمان"><figcaption><span><span class="en">Sprocket mounted on a bearing</span><span class="ar">مسنّن مركّب على رولمان</span></span><span class="tag"><span class="en">Build</span><span class="ar">تنفيذ</span></span></figcaption></figure>
+      <figure><img src="img/build-treads.jpg" width="893" height="968" loading="lazy" alt="Tread plates being bolted onto a bicycle chain" data-ar-alt="تثبيت الدواسات بالبراغي على سلسلة دراجة"><figcaption><span><span class="en">Tread plates bolted onto the chain</span><span class="ar">دواسات مثبّتة بالبراغي على السلسلة</span></span><span class="tag"><span class="en">Build</span><span class="ar">تنفيذ</span></span></figcaption></figure>
+      <figure><img src="img/build-chain.jpg" width="893" height="852" loading="lazy" alt="Track sprockets and chain laid out on the drive plate" data-ar-alt="مسنّنات الجنزير والسلسلة على لوح الحركة"><figcaption><span><span class="en">Track sprockets and chain</span><span class="ar">مسنّنات الجنزير والسلسلة</span></span><span class="tag"><span class="en">Build</span><span class="ar">تنفيذ</span></span></figcaption></figure>
+    </div>
+
+    <div class="studio">
+      <figure><img src="img/walle-front.jpg" width="1200" height="1104" loading="lazy" alt="Front view of WALL-E Junior with the arm raised" data-ar-alt="منظر أمامي لـ WALL-E Junior والذراع مرفوعة"><figcaption><span class="en">Arm raised</span><span class="ar">الذراع مرفوعة</span></figcaption></figure>
+      <figure><img src="img/walle-label.jpg" width="1147" height="1200" loading="lazy" alt="WALL-E Junior with the arm lowered and the electronics visible" data-ar-alt="WALL-E Junior والذراع منخفضة والإلكترونيات ظاهرة"><figcaption><span class="en">Arm lowered, electronics visible</span><span class="ar">الذراع منخفضة والإلكترونيات ظاهرة</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+<nav class="pager wrap" aria-label="More pages">
+  <a class="pg prev" href="teaching.html"><small><span class="en">Previous</span><span class="ar">السابق</span></small><b><span class="en">Teaching and courses</span><span class="ar">التعليم والكورسات</span></b></a>
+  <a class="pg next" href="university.html"><small><span class="en">Next</span><span class="ar">التالي</span></small><b><span class="en">University projects</span><span class="ar">المشاريع الجامعية</span></b></a>
+</nav>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span><span class="en">© 2026 Ward Alkhatib</span><span class="ar">© 2026 ورد الخطيب</span></span>
+    <span><span class="en">Mechatronics · Robotics · Community</span><span class="ar">ميكاترونيكس · روبوتيك · مجتمع</span></span>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+<script src="assets/motion.js"></script>
+</body>
+</html>

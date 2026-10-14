@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en" dir="ltr" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Side projects · Ward Alkhatib</title>
+<meta name="description" content="ROZE: an Arabic point-of-sale and accounting app for small shops, built and sold by Ward Alkhatib.">
+<meta property="og:title" content="Side projects · Ward Alkhatib">
+<meta property="og:description" content="ROZE: an Arabic point-of-sale and accounting app for small shops, built and sold by Ward Alkhatib.">
+<meta property="og:image" content="img/walle-front.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2316202E'/%3E%3Ccircle cx='11' cy='12' r='5' fill='%23E8862B'/%3E%3Ccircle cx='21' cy='12' r='5' fill='%23E8862B'/%3E%3Crect x='8' y='19' width='16' height='9' rx='1.5' fill='%23D7A85E'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&family=Noto+Kufi+Arabic:wght@600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<script>
+/* pick the language before the page paints: #ar / #en link, then the visitor's last choice, then the browser language */
+(function(){
+  var l = "en";
+  try { var s = localStorage.getItem("wa-lang"); if (s === "ar" || s === "en") l = s;
+        else if ((navigator.languages || [navigator.language || ""]).some(function(x){ return /^ar\b/i.test(x); })) l = "ar"; } catch (e) {}
+  if (location.hash === "#ar") l = "ar"; else if (location.hash === "#en") l = "en";
+  var r = document.documentElement; r.setAttribute("data-lang", l); r.lang = l; r.dir = l === "ar" ? "rtl" : "ltr";
+})();
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap wide">
+    <a class="mark" href="index.html" aria-label="Ward Alkhatib, home"><i></i>WA</a>
+    <nav class="nav" aria-label="Pages">
+      <a href="community.html"><span class="en">Community</span><span class="ar">المجتمع</span></a>
+      <a href="competitions.html"><span class="en">Competitions</span><span class="ar">المسابقات</span></a>
+      <a href="teaching.html"><span class="en">Teaching</span><span class="ar">التعليم</span></a>
+      <a href="graduation.html"><span class="en">Graduation</span><span class="ar">التخرج</span></a>
+      <a href="university.html"><span class="en">University</span><span class="ar">الجامعة</span></a>
+      <a href="side-projects.html" aria-current="page"><span class="en">Side projects</span><span class="ar">مشاريع جانبية</span></a>
+      <a href="awards.html"><span class="en">Awards</span><span class="ar">الجوائز</span></a>
+    </nav>
+    <details class="menu">
+      <summary><span class="en">Menu</span><span class="ar">القائمة</span></summary>
+      <nav class="menu-panel" aria-label="Pages">
+        <a href="index.html"><span class="en">Home</span><span class="ar">الرئيسية</span></a>
+        <a href="community.html"><span class="en">Community work</span><span class="ar">العمل المجتمعي</span></a>
+        <a href="competitions.html"><span class="en">Competition coaching</span><span class="ar">تدريب فرق المسابقات</span></a>
+        <a href="teaching.html"><span class="en">Teaching and courses</span><span class="ar">التعليم والكورسات</span></a>
+        <a href="graduation.html"><span class="en">Graduation project</span><span class="ar">مشروع التخرج</span></a>
+        <a href="university.html"><span class="en">University projects</span><span class="ar">المشاريع الجامعية</span></a>
+        <a href="side-projects.html" aria-current="page"><span class="en">Side projects</span><span class="ar">المشاريع الجانبية</span></a>
+        <a href="awards.html"><span class="en">Achievements and awards</span><span class="ar">الإنجازات والجوائز</span></a>
+      </nav>
+    </details>
+    <a class="call" href="index.html#contact"><span class="en">Contact</span><span class="ar">تواصل</span> <span class="arr" aria-hidden="true">↗</span></a>
+    <button class="lang" id="lang-toggle" type="button"><span class="en" lang="ar">العربية</span><span class="ar" lang="en">English</span></button>
+  </div>
+</header>
+
+<main id="top">
+<div class="page-head">
+  <div class="wrap">
+    <p class="crumb"><a href="index.html"><span class="en">Home</span><span class="ar">الرئيسية</span></a><span aria-hidden="true">/</span><span class="en">Side projects</span><span class="ar">المشاريع الجانبية</span></p>
+    <p class="eyebrow"><span class="en">Alongside engineering</span><span class="ar">إلى جانب الهندسة</span></p>
+    <h1 class="page-title"><span class="en">Side projects</span><span class="ar">المشاريع الجانبية</span></h1>
+    <p class="page-lead"><span class="en">Software I build next to my engineering work. The main one is ROZE, an accounting app that shop owners use every day.</span><span class="ar">برمجيات أبنيها إلى جانب عملي الهندسي، وأهمها ROZE، برنامج محاسبة يستخدمه أصحاب المحلات كل يوم.</span></p>
+  </div>
+</div>
+<section id="rose">
+  <div class="wrap">
+    <div class="rose">
+      <div class="rose-head">
+        <span class="rose-mark" aria-hidden="true">ROZE</span>
+        <div>
+          <p class="label"><span class="en">Software · my own product · since 2026</span><span class="ar">برمجيات · منتجي الخاص · منذ 2026</span></p>
+          <h2>ROZE</h2>
+          <p class="rose-sub"><span class="en">Arabic point-of-sale and accounting app for small shops</span><span class="ar">برنامج نقاط بيع ومحاسبة عربي للمحلات الصغيرة</span></p>
+        </div>
+      </div>
+      <p class="rose-text"><span class="en">ROZE runs the daily work of a shop: selling at the counter, keeping stock, tracking who owes what, and closing the cash at the end of the day. It is fully in Arabic, works without internet and keeps its data on the device. I build it and sell it to shop owners. One codebase produces a separate build for each shop, with its own name, icon, currency and type of business, and the laptop version has been through a trial day in a working shop.</span><span class="ar">يدير ROZE العمل اليومي للمحل: البيع على الصندوق، ومتابعة المخزون، وحساب الديون، وإغلاق الصندوق آخر اليوم. واجهته عربية بالكامل، ويعمل دون إنترنت، وتبقى بياناته على الجهاز. أبنيه وأبيعه لأصحاب المحلات. ومن قاعدة كود واحدة تخرج نسخة لكل محل باسمه وأيقونته وعملته ونوع نشاطه، وقد خاضت نسخة اللابتوب يوم تجربة في محل فعلي.</span></p>
+      <div class="specs">
+        <div><b class="ltr">21</b><span><span class="en">Screens, each built for phone and for laptop</span><span class="ar">شاشة، لكلٍّ منها نسخة للموبايل وأخرى للابتوب</span></span></div>
+        <div><b class="ltr">10</b><span><span class="en">Shop types with their own presets, from grocery to pharmacy</span><span class="ar">أنواع محلات لكلٍّ منها إعداداته، من البقالة إلى الصيدلية</span></span></div>
+        <div><b class="ltr">10</b><span><span class="en">Currencies supported, with two-currency debts</span><span class="ar">عملات مدعومة، مع ديون بعملتين</span></span></div>
+        <div><b class="ltr">300+</b><span><span class="en">Automated checks on the accounting core</span><span class="ar">فحص آلي على نواة المحاسبة</span></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="screens">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label"><span class="en">Screens</span><span class="ar">الشاشات</span></p>
+      <h2><span class="en">A day <em>at the</em> counter</span><span class="ar">يوم <em>على</em> الصندوق</span></h2>
+      <p class="sec-intro"><span class="en">From the laptop version, filled with sample data for a demo grocery. The app's interface is in Arabic.</span><span class="ar">من نسخة اللابتوب، ببيانات تجريبية لبقالة افتراضية. واجهة البرنامج باللغة العربية.</span></p>
+    </div>
+    <div class="gallery screens">
+      <figure class="shot"><button type="button"><img src="img/rose-pos.jpg" width="1422" height="804" loading="lazy" alt="ROZE screenshot. Point of sale: tap items, see the cart and the total, pay in cash or on credit" data-ar-alt="صورة من ROZE. نقطة البيع: المس المواد، وشاهد السلة والإجمالي، وادفع نقداً أو بالدين"></button>
+        <figcaption><span><span class="en">Point of sale: tap items, see the cart and the total, pay in cash or on credit</span><span class="ar">نقطة البيع: المس المواد، وشاهد السلة والإجمالي، وادفع نقداً أو بالدين</span></span></figcaption></figure>
+      <figure class="shot"><button type="button"><img src="img/rose-dashboard.jpg" width="1422" height="804" loading="lazy" alt="ROZE screenshot. Dashboard: today's sales, the cash drawer, profit and the last seven days" data-ar-alt="صورة من ROZE. لوحة التحكم: مبيعات اليوم، والصندوق، والربح، وآخر سبعة أيام"></button>
+        <figcaption><span><span class="en">Dashboard: today's sales, the cash drawer, profit and the last seven days</span><span class="ar">لوحة التحكم: مبيعات اليوم، والصندوق، والربح، وآخر سبعة أيام</span></span></figcaption></figure>
+      <figure class="shot"><button type="button"><img src="img/rose-statement.jpg" width="1422" height="500" loading="lazy" alt="ROZE screenshot. Customer statement with every invoice and payment, ready to print" data-ar-alt="صورة من ROZE. كشف حساب الزبون بكل فاتورة ودفعة، جاهز للطباعة"></button>
+        <figcaption><span><span class="en">Customer statement with every invoice and payment, ready to print</span><span class="ar">كشف حساب الزبون بكل فاتورة ودفعة، جاهز للطباعة</span></span></figcaption></figure>
+      <figure class="shot"><button type="button"><img src="img/rose-debts.jpg" width="1422" height="590" loading="lazy" alt="ROZE screenshot. Collecting a debt: the payment is previewed and settles the oldest invoice first" data-ar-alt="صورة من ROZE. تحصيل دين: تُعايَن الدفعة قبل تسجيلها وتسدّد أقدم فاتورة أولاً"></button>
+        <figcaption><span><span class="en">Collecting a debt: the payment is previewed and settles the oldest invoice first</span><span class="ar">تحصيل دين: تُعايَن الدفعة قبل تسجيلها وتسدّد أقدم فاتورة أولاً</span></span></figcaption></figure>
+      <figure class="shot"><button type="button"><img src="img/rose-reconcile.jpg" width="1422" height="610" loading="lazy" alt="ROZE screenshot. Reconciliation: six checks, each number traced back to its source" data-ar-alt="صورة من ROZE. المطابقة: ستة فحوص، وكل رقم يُتتبَّع إلى مصدره"></button>
+        <figcaption><span><span class="en">Reconciliation: six checks, each number traced back to its source</span><span class="ar">المطابقة: ستة فحوص، وكل رقم يُتتبَّع إلى مصدره</span></span></figcaption></figure>
+      <figure class="shot"><button type="button"><img src="img/rose-setup.jpg" width="1422" height="720" loading="lazy" alt="ROZE screenshot. Store setup: the type of business sets the categories and units" data-ar-alt="صورة من ROZE. تهيئة المتجر: نوع النشاط يحدّد التصنيفات والوحدات"></button>
+        <figcaption><span><span class="en">Store setup: the type of business sets the categories and units</span><span class="ar">تهيئة المتجر: نوع النشاط يحدّد التصنيفات والوحدات</span></span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label"><span class="en">What it does</span><span class="ar">ماذا يفعل</span></p>
+      <h2><span class="en">Everything a shop does <em>in a</em> day</span><span class="ar">كل ما يفعله المحل <em>في</em> يومه</span></h2>
+    </div>
+    <div class="feats">
+      <div class="feat"><b><span class="en">Sales</span><span class="ar">المبيعات</span></b><p><span class="en">Point of sale with barcode and short shop codes, sales by weight on a scale, held orders, and pinned items at the top.</span><span class="ar">نقطة بيع بالباركود وبرموز المحل القصيرة، والبيع بالوزن على الميزان، والطلبات المعلّقة، والمواد المثبّتة في الأعلى.</span></p></div>
+      <div class="feat"><b><span class="en">Stock</span><span class="ar">المخزون</span></b><p><span class="en">Materials in many units, opening stock in a single table, stock counts, waste with its reason, and average cost.</span><span class="ar">مواد بوحدات متعددة، وبضاعة أول المدة في جدول واحد، والجرد، والتالف مع سببه، ومتوسط الكلفة.</span></p></div>
+      <div class="feat"><b><span class="en">Customers and suppliers</span><span class="ar">الزبائن والموردون</span></b><p><span class="en">Credit sales and opening debts, printable customer statements, and supplier invoices with their age.</span><span class="ar">البيع بالآجل وديون أول المدة، وكشوف حساب للزبائن قابلة للطباعة، وفواتير الموردين مع أعمارها.</span></p></div>
+      <div class="feat"><b><span class="en">Cash and currency</span><span class="ar">الصندوق والعملات</span></b><p><span class="en">Cash drawer and its log, withdrawals, period close, exchange rates, and debts held in two currencies.</span><span class="ar">الصندوق وسجله، والمسحوبات، وإغلاق الفترة، وأسعار الصرف، والديون بعملتين.</span></p></div>
+      <div class="feat"><b><span class="en">Reports</span><span class="ar">التقارير</span></b><p><span class="en">A dashboard that starts with today, then the week and the month, then what needs attention, plus sales and invoice reports.</span><span class="ar">لوحة تبدأ باليوم ثم الأسبوع ثم الشهر ثم ما يحتاج انتباهك، إلى جانب تقارير المبيعات والفواتير.</span></p></div>
+      <div class="feat"><b><span class="en">Backups</span><span class="ar">النسخ الاحتياطي</span></b><p><span class="en">A daily automatic backup to a folder on the laptop, with compare and restore.</span><span class="ar">نسخة احتياطية يومية تلقائية إلى مجلد على اللابتوب، مع المقارنة والاستعادة.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<hr class="sheet-rule">
+
+<section id="decisions" class="linen">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label"><span class="en">Engineering decisions</span><span class="ar">قرارات هندسية</span></p>
+      <h2><span class="en">Built <em>to be trusted with</em> money</span><span class="ar">مبني <em>ليؤتمن على</em> المال</span></h2>
+      <p class="sec-intro"><span class="en">An accounting app is only useful if the shop owner believes its numbers. Most of the work went into making them exact and checkable.</span><span class="ar">برنامج المحاسبة لا ينفع إلا إذا وثق صاحب المحل بأرقامه، لذلك ذهب معظم العمل إلى جعلها دقيقة وقابلة للتحقق.</span></p>
+    </div>
+    <div class="feats">
+      <div class="feat"><b><span class="en">Exact money</span><span class="ar">مال بلا كسور</span></b><p><span class="en">Amounts are kept in whole lira and exchange rates stay exact. A cash total rounds to what can actually be paid in notes, and haggling never changes the item's price.</span><span class="ar">المبالغ بالليرة الكاملة وأسعار الصرف تبقى دقيقة. يُقرَّب إجمالي الفاتورة النقدية إلى ما يمكن دفعه فعلاً بالأوراق النقدية، والمساومة لا تغيّر سعر المادة.</span></p></div>
+      <div class="feat"><b><span class="en">Every number checkable</span><span class="ar">كل رقم قابل للتحقق</span></b><p><span class="en">A reconciliation screen recomputes each derived figure from its source records and shows where a difference comes from.</span><span class="ar">شاشة مطابقة تعيد حساب كل رقم مشتق من سجلاته الأصلية، وتبيّن مصدر أي فرق.</span></p></div>
+      <div class="feat"><b><span class="en">Debts that age properly</span><span class="ar">ديون تُحسب أعمارها</span></b><p><span class="en">Supplier payments settle the oldest invoices first, so the shop always knows what is overdue.</span><span class="ar">تُسدّد دفعات الموردين أقدم الفواتير أولاً، فيعرف المحل دائماً ما تأخّر سداده.</span></p></div>
+      <div class="feat"><b><span class="en">Dollars as stock</span><span class="ar">الدولار بضاعة</span></b><p><span class="en">An exchange desk treats foreign currency like goods, with its own drawer, cost and profit.</span><span class="ar">طاولة صرافة تعامل العملة الأجنبية كبضاعة، لها درجها وكلفتها وربحها.</span></p></div>
+      <div class="feat"><b><span class="en">Fast with years of history</span><span class="ar">سريع مع تراكم السنوات</span></b><p><span class="en">Recording a sale no longer reloads the shop's whole history. In testing a sale took about 0.2 s with 1,900 invoices on file.</span><span class="ar">تسجيل البيعة لا يعيد تحميل تاريخ المحل كله. في الاختبار استغرقت البيعة نحو 0.2 ثانية مع 1,900 فاتورة مسجّلة.</span></p></div>
+      <div class="feat"><b><span class="en">Made for the counter</span><span class="ar">مصمّم للصندوق</span></b><p><span class="en">Keyboard shortcuts on the laptop, one search box that understands names and codes, and a portable package that runs without installing.</span><span class="ar">اختصارات لوحة المفاتيح على اللابتوب، وصندوق بحث واحد يفهم الاسم والرمز، وحزمة محمولة تعمل دون تثبيت.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<hr class="sheet-rule">
+
+<section id="platforms">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label"><span class="en">Platforms and stack</span><span class="ar">المنصات والتقنيات</span></p>
+      <h2><span class="en">Phone <em>and</em> laptop, offline</span><span class="ar">موبايل <em>و</em>لابتوب ودون إنترنت</span></h2>
+    </div>
+    <dl class="specsheet">
+      <div><dt><span class="en">Phone</span><span class="ar">الموبايل</span></dt><dd><span class="en">Android app</span><span class="ar">تطبيق أندرويد</span></dd></div>
+      <div><dt><span class="en">Laptop</span><span class="ar">اللابتوب</span></dt><dd><span class="en">Runs in the browser or as a Windows app, with its own screens and keyboard shortcuts</span><span class="ar">يعمل في المتصفح أو كتطبيق ويندوز، بشاشات خاصة واختصارات لوحة المفاتيح</span></dd></div>
+      <div><dt><span class="en">Data</span><span class="ar">البيانات</span></dt><dd><span class="en">Local SQLite database on the device, no internet needed</span><span class="ar">قاعدة بيانات SQLite محلية على الجهاز، دون حاجة للإنترنت</span></dd></div>
+      <div><dt><span class="en">Code</span><span class="ar">الكود</span></dt><dd><span class="en">About 53,000 lines of TypeScript</span><span class="ar">نحو 53,000 سطر TypeScript</span></dd></div>
+    </dl>
+    <div class="stack" style="margin-top:22px">
+      <span class="label"><span class="en">Built with</span><span class="ar">بُني باستخدام</span></span>
+      <div class="chips"><span>TypeScript</span><span>React Native</span><span>Expo Router</span><span>SQLite</span><span>Zustand</span><span>Electron</span></div>
+    </div>
+  </div>
+</section>
+<nav class="pager wrap" aria-label="More pages">
+  <a class="pg prev" href="university.html"><small><span class="en">Previous</span><span class="ar">السابق</span></small><b><span class="en">University projects</span><span class="ar">المشاريع الجامعية</span></b></a>
+  <a class="pg next" href="awards.html"><small><span class="en">Next</span><span class="ar">التالي</span></small><b><span class="en">Achievements and awards</span><span class="ar">الإنجازات والجوائز</span></b></a>
+</nav>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span><span class="en">© 2026 Ward Alkhatib</span><span class="ar">© 2026 ورد الخطيب</span></span>
+    <span><span class="en">Mechatronics · Robotics · Community</span><span class="ar">ميكاترونيكس · روبوتيك · مجتمع</span></span>
+  </div>
+</footer>
+
+<dialog class="lb" id="lb" aria-label="Photo viewer">
+  <figure><img id="lb-img" alt=""><figcaption id="lb-cap"></figcaption></figure>
+  <button class="lb-btn lb-prev" id="lb-prev" type="button" aria-label="Previous photo">‹</button>
+  <button class="lb-btn lb-next" id="lb-next" type="button" aria-label="Next photo">›</button>
+  <button class="lb-btn lb-close" id="lb-close" type="button" aria-label="Close">×</button>
+</dialog>
+<script src="assets/site.js"></script>
+<script src="assets/motion.js"></script>
+</body>
+</html>

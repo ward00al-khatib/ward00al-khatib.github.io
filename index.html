@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en" dir="ltr" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ward Alkhatib</title>
+<meta name="description" content="Ward Alkhatib, mechatronics engineer and robotics trainer from Syria. Graduation project WALL-E Junior, an autonomous waste-sorting robot; coach of Team H2A, silver at the WRO 2023 International Final.">
+<meta property="og:title" content="Ward Alkhatib">
+<meta property="og:description" content="Ward Alkhatib, mechatronics engineer and robotics trainer from Syria. Graduation project WALL-E Junior, an autonomous waste-sorting robot; coach of Team H2A, silver at the WRO 2023 International Final.">
+<meta property="og:image" content="img/walle-front.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2316202E'/%3E%3Ccircle cx='11' cy='12' r='5' fill='%23E8862B'/%3E%3Ccircle cx='21' cy='12' r='5' fill='%23E8862B'/%3E%3Crect x='8' y='19' width='16' height='9' rx='1.5' fill='%23D7A85E'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&family=Noto+Kufi+Arabic:wght@600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<script>
+/* pick the language before the page paints: #ar / #en link, then the visitor's last choice, then the browser language */
+(function(){
+  var l = "en";
+  try { var s = localStorage.getItem("wa-lang"); if (s === "ar" || s === "en") l = s;
+        else if ((navigator.languages || [navigator.language || ""]).some(function(x){ return /^ar\b/i.test(x); })) l = "ar"; } catch (e) {}
+  if (location.hash === "#ar") l = "ar"; else if (location.hash === "#en") l = "en";
+  var r = document.documentElement; r.setAttribute("data-lang", l); r.lang = l; r.dir = l === "ar" ? "rtl" : "ltr";
+  /* the first visit in a session opens with a short system check */
+  try { if (!matchMedia("(prefers-reduced-motion: reduce)").matches && !sessionStorage.getItem("wa-boot")){ r.classList.add("boot"); setTimeout(function(){ r.classList.remove("boot"); }, 4000); } } catch (e) {}
+})();
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap wide">
+    <a class="mark" href="index.html" aria-label="Ward Alkhatib, home"><i></i>WA</a>
+    <nav class="nav" aria-label="Pages">
+      <a href="community.html"><span class="en">Community</span><span class="ar">المجتمع</span></a>
+      <a href="competitions.html"><span class="en">Competitions</span><span class="ar">المسابقات</span></a>
+      <a href="teaching.html"><span class="en">Teaching</span><span class="ar">التعليم</span></a>
+      <a href="graduation.html"><span class="en">Graduation</span><span class="ar">التخرج</span></a>
+      <a href="university.html"><span class="en">University</span><span class="ar">الجامعة</span></a>
+      <a href="side-projects.html"><span class="en">Side projects</span><span class="ar">مشاريع جانبية</span></a>
+      <a href="awards.html"><span class="en">Awards</span><span class="ar">الجوائز</span></a>
+    </nav>
+    <details class="menu">
+      <summary><span class="en">Menu</span><span class="ar">القائمة</span></summary>
+      <nav class="menu-panel" aria-label="Pages">
+        <a href="index.html" aria-current="page"><span class="en">Home</span><span class="ar">الرئيسية</span></a>
+        <a href="community.html"><span class="en">Community work</span><span class="ar">العمل المجتمعي</span></a>
+        <a href="competitions.html"><span class="en">Competition coaching</span><span class="ar">تدريب فرق المسابقات</span></a>
+        <a href="teaching.html"><span class="en">Teaching and courses</span><span class="ar">التعليم والكورسات</span></a>
+        <a href="graduation.html"><span class="en">Graduation project</span><span class="ar">مشروع التخرج</span></a>
+        <a href="university.html"><span class="en">University projects</span><span class="ar">المشاريع الجامعية</span></a>
+        <a href="side-projects.html"><span class="en">Side projects</span><span class="ar">المشاريع الجانبية</span></a>
+        <a href="awards.html"><span class="en">Achievements and awards</span><span class="ar">الإنجازات والجوائز</span></a>
+      </nav>
+    </details>
+    <a class="call" href="index.html#contact"><span class="en">Contact</span><span class="ar">تواصل</span> <span class="arr" aria-hidden="true">↗</span></a>
+    <button class="lang" id="lang-toggle" type="button"><span class="en" lang="ar">العربية</span><span class="ar" lang="en">English</span></button>
+  </div>
+</header>
+
+<main id="top">
+<!-- ================= HERO: WALL-E JUNIOR ================= -->
+<div class="hero">
+  <div class="bgword" aria-hidden="true">WALL·E JUNIOR</div>
+  <div class="wrap wide">
+    <div class="hero-grid">
+      <div class="hero-head">
+        <p class="eyebrow"><span class="dot" aria-hidden="true"></span><span class="en"><span class="typer" data-words="Mechatronics engineer|Robotics trainer|Competition coach|Computer vision|SolidWorks design">Mechatronics Engineer · Robotics Trainer</span></span><span class="ar"><span class="typer" data-words="مهندس ميكاترونيكس|مدرّب روبوتيك|مدرّب فرق مسابقات|رؤية حاسوبية|تصميم على SolidWorks">مهندس ميكاترونيكس · مدرّب روبوتيك</span></span></p>
+        <div class="namebox">
+          <h1 class="name"><span class="en"><span>Ward</span><span>Alkhatib</span></span><span class="ar"><span>ورد</span><span>الخطيب</span></span></h1>
+          <div class="dim" aria-hidden="true"><span class="dim-label"><span class="en">MECHATRONICS · ROBOTICS · AUTOMATION</span><span class="ar">ميكاترونيكس · روبوتيك · أتمتة</span></span></div>
+        </div>
+        <p class="tagline"><span class="en">Building robots <em>and the</em> teams <em>that</em> build them</span><span class="ar">أبني الروبوتات <em>و</em>الفرق <em>التي</em> تصنعها</span></p>
+      </div>
+      <div class="hero-body">
+        <p class="lead">
+          <span class="en">Meet WALL-E Junior, the graduation project I built with a team of four: an autonomous tracked robot that finds waste, sorts it into plastic, paper, metal or glass with a YOLOv8 model, and places it in the right bin with a 5-DOF arm. My part was the computer vision and the SolidWorks design of the arm and the robot. Before it, I spent four years teaching robotics in Homs and coached Team H2A to silver at the WRO 2023 International Final.</span>
+          <span class="ar">تعرّف على WALL-E Junior، مشروع التخرج الذي بنيته مع فريق من أربعة طلاب: روبوت ذاتي القيادة على جنازير يعثر على النفايات، ويصنّفها إلى بلاستيك وورق ومعدن وزجاج بنموذج YOLOv8، ثم يضعها في الحاوية الصحيحة بذراع خماسية درجات الحرية. وكان دوري الرؤية الحاسوبية وتصميم الذراع والروبوت على SolidWorks. وقبله أمضيتُ أربع سنوات أدرّب على الروبوتيك في حمص، وأشرفتُ على فريق H2A حتى نال الفضية في النهائي الدولي WRO 2023.</span>
+        </p>
+        <div class="cta">
+          <a class="btn primary" href="graduation.html"><span class="en">See the robot</span><span class="ar">تفاصيل الروبوت</span>
+            <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+          <a class="btn ghost" href="#contact"><span class="en">Get in touch</span><span class="ar">تواصل معي</span></a>
+        </div>
+      </div>
+
+      <div class="stage-col" id="stage-col">
+      <div class="stage" id="stage">
+        <img class="stage-poster" src="img/walle-front.jpg" width="1200" height="1104" alt="WALL-E Junior, a tracked robot with a black robotic arm and orange eyes" data-ar-alt="WALL-E Junior، روبوت على جنازير بذراع سوداء وعينين برتقاليتين">
+        <canvas id="robot-canvas" role="img" aria-label="Interactive 3D model of WALL-E Junior on a turntable. Drag to turn it, the arm follows the pointer, click to make it wave; the Sort an item button plays one sorting cycle."></canvas>
+        <svg class="leaders" id="leaders" aria-hidden="true"></svg>
+        <div class="callouts" aria-hidden="true">
+          <div class="callout l c1" data-anchor="elbow"><span class="balloon">1</span><span><span class="en">5-DOF arm, 6× MG996R servos</span><span class="ar">ذراع 5 درجات حرية، 6 محركات MG996R</span></span></div>
+          <div class="callout l c2" data-anchor="gripper"><span class="balloon">2</span><span><span class="en">Gripper + metal-check sensor</span><span class="ar">ملقط وحساس للتحقق من المعدن</span></span></div>
+          <div class="callout r c3" data-anchor="panel"><span class="balloon">3</span><span><span class="en">Raspberry Pi 5 + Arduino UNO</span><span class="ar">Raspberry Pi 5 و Arduino UNO</span></span></div>
+          <div class="callout r c4" data-anchor="track"><span class="balloon">4</span><span><span class="en">Bicycle-chain tracks, 4× 12 V motors</span><span class="ar">جنازير من سلاسل دراجات، 4 محركات 12 فولت</span></span></div>
+          <div class="callout r c6" data-anchor="bins"><span class="balloon">5</span><span><span class="en">3 rear bins under the lid</span><span class="ar">3 حاويات خلفية تحت الغطاء</span></span></div>
+          <div class="callout l c5" data-anchor="camera"><span class="balloon">3</span><span><span class="en">Pi Camera Module 3, centre of the motor deck</span><span class="ar">كاميرا Pi Camera Module 3 وسط رف المحركات</span></span></div>
+        </div>
+      </div>
+      <div class="stage-foot">
+          <p class="hint">
+            <span class="fine"><span class="en">Drag to turn it. Move the cursor and the arm reaches for it.</span><span class="ar">اسحبه ليدور، وحرّك المؤشر لتمتد الذراع نحوه.</span></span>
+            <span class="coarse"><span class="en">Drag to turn it, tap it to say hi.</span><span class="ar">اسحبه ليدور، والمسه ليلوّح لك.</span></span>
+            <button class="wave-btn" id="demo-btn" type="button"><span class="en">Sort an item</span><span class="ar">افرز قطعة</span></button>
+            <button class="wave-btn alt" id="wave-btn" type="button"><span class="en">Wave</span><span class="ar">لوّح</span></button>
+          </p>
+          <div class="tb" aria-label="Drawing title block">
+            <div class="full"><small><span class="en">Title</span><span class="ar">الاسم</span></small><strong>WALL-E Junior</strong></div>
+            <div><small><span class="en">Type</span><span class="ar">النوع</span></small><strong><span class="en">Graduation project, team of 4</span><span class="ar">مشروع تخرج، فريق من 4</span></strong></div>
+            <div><small><span class="en">Built at</span><span class="ar">المكان</span></small><strong><span class="en">Homs University, 2025–26</span><span class="ar">جامعة حمص، 2025–2026</span></strong></div>
+            <div class="full"><small><span class="en">Model</span><span class="ar">النموذج</span></small><strong><span class="en">Interactive 3D, approximate geometry</span><span class="ar">ثلاثي الأبعاد تفاعلي، بأبعاد تقريبية</span></strong></div>
+          </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="specs">
+      <div><b class="ltr">2020–24</b><span><span class="en">Robotics trainer at three institutions in Homs</span><span class="ar">مدرّب روبوتيك في ثلاث مؤسسات في حمص</span></span></div>
+      <div><b class="ltr">6–18</b><span><span class="en">Ages of the students I trained</span><span class="ar">أعمار الطلاب الذين درّبتهم</span></span></div>
+      <div><b class="hot"><span class="en">Silver</span><span class="ar">فضية</span></b><span><span class="en">WRO 2023 International Final, Panama</span><span class="ar">النهائي الدولي WRO 2023، بنما</span></span></div>
+      <div><b class="ltr">~300</b><span><span class="en">Members in the youth initiative I co-founded</span><span class="ar">عضو في المبادرة الشبابية التي شاركتُ في تأسيسها</span></span></div>
+    </div>
+  </div>
+</div>
+
+
+<div class="marquee" aria-hidden="true"><div class="marquee-track"><span>SolidWorks</span><span>YOLOv8</span><span>ROS 2</span><span>Raspberry Pi 5</span><span>Arduino</span><span>Python</span><span>MATLAB</span><span>Simulink</span><span>PID</span><span>MPPT</span><span>LEGO SPIKE Prime</span><span>LEGO EV3</span><span>mBot</span><span>Scratch</span><span>WRO</span><span>ARC Syria</span></div></div>
+
+<section id="areas">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label"><span class="en">Areas of work</span><span class="ar">مجالات عملي</span></p>
+      <h2><span class="en">What I work on</span><span class="ar">ما أعمل عليه</span></h2>
+    </div>
+    <div class="areas">
+      <a class="area" href="community.html">
+        <span class="area-pic "><img src="img/youth-gathering.jpg" alt="" loading="lazy"></span>
+        <span class="area-body">
+          <small class="ltr"><span class="en">2025 – now</span><span class="ar">2025 – الآن</span></small>
+          <b><span class="en">Community work</span><span class="ar">العمل المجتمعي</span></b>
+          <span class="area-text"><span class="en">Co-founder of a 300-member youth initiative serving Al-Qurayya.</span><span class="ar">شريك مؤسس لمبادرة شبابية من 300 عضو تخدم بلدة القريّا.</span></span>
+          <span class="go" aria-hidden="true">→</span>
+        </span>
+      </a>
+      <a class="area" href="competitions.html">
+        <span class="area-pic "><img src="img/wro-syria-team.jpg" alt="" loading="lazy"></span>
+        <span class="area-body">
+          <small class="ltr"><span class="en">2020 – 2024</span><span class="ar">2020 – 2024</span></small>
+          <b><span class="en">Competition coaching</span><span class="ar">تدريب فرق المسابقات</span></b>
+          <span class="area-text"><span class="en">Ten medals with my teams since 2020, including gold at WRO Syria 2023 and silver at the world final.</span><span class="ar">عشر ميداليات مع فرقي منذ 2020، منها ذهبية WRO سوريا 2023 وفضية النهائي العالمي.</span></span>
+          <span class="go" aria-hidden="true">→</span>
+        </span>
+      </a>
+      <a class="area" href="teaching.html">
+        <span class="area-pic "><img src="img/lego-class.jpg" alt="" loading="lazy"></span>
+        <span class="area-body">
+          <small class="ltr"><span class="en">2020 – 2024</span><span class="ar">2020 – 2024</span></small>
+          <b><span class="en">Teaching and courses</span><span class="ar">التعليم والكورسات</span></b>
+          <span class="area-text"><span class="en">Robotics and programming for ages 6–18 at three institutions in Homs.</span><span class="ar">روبوتيك وبرمجة للأعمار 6–18 في ثلاث مؤسسات في حمص.</span></span>
+          <span class="go" aria-hidden="true">→</span>
+        </span>
+      </a>
+      <a class="area" href="graduation.html">
+        <span class="area-pic dark"><img src="img/walle-front.jpg" alt="" loading="lazy"></span>
+        <span class="area-body">
+          <small class="ltr"><span class="en">2025 – 2026</span><span class="ar">2025 – 2026</span></small>
+          <b><span class="en">Graduation project</span><span class="ar">مشروع التخرج</span></b>
+          <span class="area-text"><span class="en">WALL-E Junior, an autonomous waste-sorting robot. In testing it classified 19 of 20 items correctly.</span><span class="ar">WALL-E Junior، روبوت ذاتي القيادة لفرز النفايات. في الاختبار صنّف 19 قطعة من 20 تصنيفاً صحيحاً.</span></span>
+          <span class="go" aria-hidden="true">→</span>
+        </span>
+      </a>
+      <a class="area" href="university.html">
+        <span class="area-pic light"><img src="img/robotics-club.jpg" alt="" loading="lazy"></span>
+        <span class="area-body">
+          <small class="ltr"><span class="en">2018 – 2026</span><span class="ar">2018 – 2026</span></small>
+          <b><span class="en">University projects</span><span class="ar">المشاريع الجامعية</span></b>
+          <span class="area-text"><span class="en">Control-systems projects in MATLAB/Simulink, my graduation robot and the Robotics Club.</span><span class="ar">مشاريع أنظمة تحكم على MATLAB/Simulink، وروبوت التخرج، ونادي الروبوتيك.</span></span>
+          <span class="go" aria-hidden="true">→</span>
+        </span>
+      </a>
+      <a class="area" href="side-projects.html">
+        <span class="area-pic screen"><img src="img/rose-pos.jpg" alt="" loading="lazy"></span>
+        <span class="area-body">
+          <small class="ltr"><span class="en">Software</span><span class="ar">برمجيات</span></small>
+          <b><span class="en">Side projects</span><span class="ar">المشاريع الجانبية</span></b>
+          <span class="area-text"><span class="en">ROZE, an Arabic point-of-sale and accounting app I build and sell to shops.</span><span class="ar">ROZE، برنامج نقاط بيع ومحاسبة عربي أبنيه وأبيعه للمحلات.</span></span>
+          <span class="go" aria-hidden="true">→</span>
+        </span>
+      </a>
+      <a class="area" href="awards.html">
+        <span class="area-pic up"><img src="img/portrait-medal.jpg" alt="" loading="lazy"></span>
+        <span class="area-body">
+          <small class="ltr"><span class="en">2020 – 2026</span><span class="ar">2020 – 2026</span></small>
+          <b><span class="en">Achievements and awards</span><span class="ar">الإنجازات والجوائز</span></b>
+          <span class="area-text"><span class="en">Ten medals as a coach since 2020, and a Sumo podium sweep in 2024.</span><span class="ar">عشر ميداليات بصفتي مدرّباً منذ 2020، ومنصة سومو كاملة في 2024.</span></span>
+          <span class="go" aria-hidden="true">→</span>
+        </span>
+      </a>
+      <a class="area contact-card" href="#contact">
+        <span class="area-body">
+          <small><span class="en">Contact</span><span class="ar">تواصل</span></small>
+          <b><span class="en">Work with me</span><span class="ar">لنعمل معاً</span></b>
+          <span class="area-text"><span class="en">Robotics training, engineering projects or community collaboration.</span><span class="ar">تدريب روبوتيك، أو مشاريع هندسية، أو تعاون مجتمعي.</span></span>
+          <span class="go" aria-hidden="true">→</span>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+<hr class="sheet-rule">
+<section id="profile" class="linen">
+  <div class="wrap profile-grid">
+    <div class="sec-head" style="margin-bottom:0">
+      <p class="label"><span class="en">Profile</span><span class="ar">نبذة</span></p>
+      <h2><span class="en">Engineering, <em>taught by</em> hand</span><span class="ar">هندسة <em>تُعلَّم</em> باليد</span></h2>
+      <p class="profile-text" style="margin-top:14px">
+        <span class="en">I graduated in Mechatronics, Robotics and Automation Engineering from Homs University in 2026, and most of my work sits where engineering meets teaching. I have designed robotics curricula by age group, led mechanical design and 3D printing for competition robots, and supervised teams from their first lesson to a world final. Since 2025 I have brought the same habits of structure, data and teamwork to community work.</span>
+        <span class="ar">تخرّجتُ في هندسة الميكاترونيكس والروبوتيك والأتمتة من جامعة حمص عام 2026، ويقع معظم عملي حيث تلتقي الهندسة بالتعليم. صمّمتُ مناهج روبوتيك مقسّمة حسب الفئات العمرية، وقُدتُ التصميم الميكانيكي والطباعة ثلاثية الأبعاد لروبوتات المسابقات، وأشرفتُ على فرق من أول درس حتى النهائي العالمي. ومنذ 2025 أنقل العادات نفسها، من التنظيم والبيانات والعمل الجماعي، إلى العمل المجتمعي.</span>
+      </p>
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="6"/><path d="M20 4v5M20 31v5M4 20h5M31 20h5M8.7 8.7l3.5 3.5M27.8 27.8l3.5 3.5M8.7 31.3l3.5-3.5M27.8 12.2l3.5-3.5"/><circle class="acc" cx="20" cy="20" r="1.5"/></svg>
+        <div><h3><span class="en">Engineering</span><span class="ar">الهندسة</span></h3>
+          <p><span class="en">Mechanical design in SolidWorks, 3D printing and fabrication, and Arduino-based electronics with sensors and motor control.</span><span class="ar">تصميم ميكانيكي على SolidWorks، وطباعة ثلاثية الأبعاد وتصنيع، وإلكترونيات مبنية على Arduino مع الحساسات والتحكم بالمحركات.</span></p></div>
+      </div>
+      <div class="pillar">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="5" y="8" width="30" height="20" rx="1"/><path d="M14 34h12M20 28v6"/><path class="acc" d="M11 22l5-6 4 4 6-7"/></svg>
+        <div><h3><span class="en">Education</span><span class="ar">التعليم</span></h3>
+          <p><span class="en">Hands-on robotics and programming for ages 6–18, with inclusive approaches for children with special needs, including children on the autism spectrum.</span><span class="ar">تعليم عملي للروبوتيك والبرمجة للأعمار من 6 إلى 18 سنة، مع أساليب دامجة للأطفال من ذوي الاحتياجات الخاصة، ومنهم أطفال طيف التوحد.</span></p></div>
+      </div>
+      <div class="pillar">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="12" r="4.5"/><circle cx="9" cy="17" r="3.5"/><circle cx="31" cy="17" r="3.5"/><path d="M11.5 33c0-5 3.8-9 8.5-9s8.5 4 8.5 9M3 31c0-4 2.6-7 6-7M37 31c0-4-2.6-7-6-7"/><path class="acc" d="M16 37h8"/></svg>
+        <div><h3><span class="en">Community</span><span class="ar">المجتمع</span></h3>
+          <p><span class="en">Co-founder of a 300-member youth initiative: a town-wide database, digital archiving, feasibility studies and public programs.</span><span class="ar">شريك مؤسس لمبادرة شبابية من 300 عضو: قاعدة بيانات على مستوى البلدة، وأرشفة رقمية، ودراسات جدوى، وبرامج للأهالي.</span></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+<hr class="sheet-rule">
+<section id="toolkit">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label"><span class="en">Toolkit</span><span class="ar">الأدوات والمهارات</span></p>
+      <h2><span class="en">Bill <em>of</em> materials</span><span class="ar">قائمة المكوّنات</span></h2>
+    </div>
+    <div class="bom-wrap">
+      <table class="bom">
+        <thead><tr>
+          <th><span class="en">Item</span><span class="ar">البند</span></th>
+          <th><span class="en">Area</span><span class="ar">المجال</span></th>
+          <th><span class="en">Components</span><span class="ar">المكوّنات</span></th>
+        </tr></thead>
+        <tbody>
+          <tr><td>01</td><td><span class="en">CAD &amp; mechanical design</span><span class="ar">التصميم الميكانيكي</span></td><td>SolidWorks · <span class="en">CAD modelling · design optimization</span><span class="ar">النمذجة · تحسين التصميم</span></td></tr>
+          <tr><td>02</td><td><span class="en">Fabrication</span><span class="ar">التصنيع</span></td><td><span class="en">3D printing · mechanical assembly</span><span class="ar">الطباعة ثلاثية الأبعاد · التجميع الميكانيكي</span></td></tr>
+          <tr><td>03</td><td><span class="en">Electronics</span><span class="ar">الإلكترونيات</span></td><td>Arduino · <span class="en">sensors · motor control · circuit design</span><span class="ar">الحساسات · التحكم بالمحركات · تصميم الدارات</span></td></tr>
+          <tr><td>04</td><td><span class="en">Programming</span><span class="ar">البرمجة</span></td><td><span class="en">Arduino programming · Scratch · block-based coding</span><span class="ar">برمجة Arduino · Scratch · البرمجة بالكتل</span></td></tr>
+          <tr><td>05</td><td><span class="en">Computer vision</span><span class="ar">الرؤية الحاسوبية</span></td><td>YOLOv8 · Ultralytics · Python · <span class="en">deployment on Raspberry Pi 5</span><span class="ar">التشغيل على Raspberry Pi 5</span></td></tr>
+          <tr><td>06</td><td><span class="en">Control and simulation</span><span class="ar">التحكم والمحاكاة</span></td><td>MATLAB · Simulink · PID · MPPT · <span class="en">system modelling</span><span class="ar">نمذجة الأنظمة</span></td></tr>
+          <tr><td>07</td><td><span class="en">Educational robotics</span><span class="ar">الروبوتات التعليمية</span></td><td>LEGO EV3 · LEGO SPIKE Prime · Edison · mBot · Codey Rocky</td></tr>
+          <tr><td>08</td><td><span class="en">Teaching</span><span class="ar">التعليم</span></td><td><span class="en">Curriculum design · competition coaching · inclusive education</span><span class="ar">تصميم المناهج · تدريب فرق المسابقات · التعليم الدامج</span></td></tr>
+          <tr><td>09</td><td><span class="en">Leadership</span><span class="ar">القيادة</span></td><td><span class="en">Team leadership · project coordination · community development</span><span class="ar">قيادة الفرق · تنسيق المشاريع · التنمية المجتمعية</span></td></tr>
+          <tr><td>10</td><td><span class="en">Data &amp; planning</span><span class="ar">البيانات والتخطيط</span></td><td><span class="en">Database development · digital archiving · feasibility studies</span><span class="ar">بناء قواعد البيانات · الأرشفة الرقمية · دراسات الجدوى</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<hr class="sheet-rule">
+
+<section id="contact">
+  <div class="wrap contact">
+    <div class="sec-head" style="margin-bottom:0">
+      <p class="label"><span class="en">Contact</span><span class="ar">تواصل</span></p>
+      <h2><span class="en">Let's build <em>something</em></span><span class="ar">لنبنِ شيئاً <em>معاً</em></span></h2>
+      <p class="sec-intro"><span class="en">For robotics training, engineering projects or community collaboration, reach me here.</span><span class="ar">للتدريب على الروبوتيك أو المشاريع الهندسية أو التعاون المجتمعي، تواصل معي هنا.</span></p>
+    </div>
+    <div class="c-rows">
+      <div class="c-row">
+        <span class="label"><span class="en">Phone</span><span class="ar">الهاتف</span></span>
+        <span class="val ltr" id="phone">+963 991 050 138</span>
+        <span class="c-actions">
+          <button class="mini" type="button" id="copy-phone"><span class="en">Copy</span><span class="ar">نسخ</span></button>
+          <a class="mini" href="https://wa.me/963991050138" target="_blank" rel="noopener">WhatsApp</a>
+        </span>
+      </div>
+      <div class="c-row">
+        <span class="label">LinkedIn</span>
+        <span class="val ltr"><a href="https://www.linkedin.com/in/ward-alkhatib-76b454210" target="_blank" rel="noopener">in/ward-alkhatib-76b454210</a></span>
+        <span class="c-actions"></span>
+      </div>
+      <div class="c-row">
+        <span class="label">Facebook</span>
+        <span class="val ltr"><a href="https://www.facebook.com/ward.alkhatib" target="_blank" rel="noopener">facebook.com/ward.alkhatib</a></span>
+        <span class="c-actions"></span>
+      </div>
+      <div class="c-row">
+        <span class="label"><span class="en">Location</span><span class="ar">الموقع</span></span>
+        <span class="val" style="user-select:auto;font-family:var(--f-body)"><span class="en">Syria</span><span class="ar">سوريا</span></span>
+        <span class="c-actions"></span>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span><span class="en">© 2026 Ward Alkhatib</span><span class="ar">© 2026 ورد الخطيب</span></span>
+    <span><span class="en">Mechatronics · Robotics · Community</span><span class="ar">ميكاترونيكس · روبوتيك · مجتمع</span></span>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+<script src="assets/motion.js"></script>
+<script type="importmap">
+{ "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+<script type="module" src="assets/robot.js"></script>
+</body>
+</html>
