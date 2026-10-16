@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="440" viewBox="-220.0 -220.0 440 440">
+<title>ROZE — Ward Alkhatib</title>
+<style>
+.a{animation-duration:4.0s;animation-iteration-count:infinite;animation-fill-mode:both}
+.servo{animation-name:servo}
+@keyframes servo{
+0%{transform:rotate(0deg);animation-timing-function:cubic-bezier(.6,0,.3,1)}
+12%{transform:rotate(97deg);animation-timing-function:ease-in-out}
+16%{transform:rotate(87deg);animation-timing-function:ease-in-out}
+19.5%{transform:rotate(91deg);animation-timing-function:ease-out}
+22%,100%{transform:rotate(90deg)}}
+.gear{animation-name:gear}
+@keyframes gear{
+0%{transform:rotate(0deg);animation-timing-function:cubic-bezier(.6,0,.3,1)}
+14%{transform:rotate(-40deg);animation-timing-function:ease-in-out}
+19%{transform:rotate(-34.5deg);animation-timing-function:ease-out}
+23%,100%{transform:rotate(-36deg)}}
+.spark{animation-name:spark}
+@keyframes spark{
+0%{transform:scale(1);animation-timing-function:cubic-bezier(.2,.7,.3,1)}
+5%{transform:scale(1.28);animation-timing-function:ease-in-out}
+13%,100%{transform:scale(1)}}
+.ripple{animation-name:ripple}
+@keyframes ripple{
+0%{transform:scale(.9);opacity:0;animation-timing-function:ease-out}
+4%{transform:scale(1.15);opacity:.85;animation-timing-function:cubic-bezier(.1,.6,.3,1)}
+26%,100%{transform:scale(2.7);opacity:0}}
+@media (prefers-reduced-motion:reduce){.a{animation:none!important}}
+</style><mask id="ra" maskUnits="userSpaceOnUse" x="-240" y="-240" width="480" height="480"><rect x="-240" y="-240" width="480" height="480" fill="#000"/><g class="a gear" style="animation-delay:0.48s"><path d="M-32.9,-185.1 L-28.15,-212.14 L28.15,-212.14 L32.9,-185.1 L82.18,-169.09 L101.91,-188.17 L147.47,-155.08 L135.42,-130.41 L165.87,-88.49 L193.06,-92.33 L210.46,-38.78 L186.21,-25.9 L186.21,25.9 L210.46,38.78 L193.06,92.33 L165.87,88.49 L135.42,130.41 L147.47,155.08 L101.91,188.17 L82.18,169.09 L32.9,185.1 L28.15,212.14 L-28.15,212.14 L-32.9,185.1 L-82.18,169.09 L-101.91,188.17 L-147.47,155.08 L-135.42,130.41 L-165.87,88.49 L-193.06,92.33 L-210.46,38.78 L-186.21,25.9 L-186.21,-25.9 L-210.46,-38.78 L-193.06,-92.33 L-165.87,-88.49 L-135.42,-130.41 L-147.47,-155.08 L-101.91,-188.17 L-82.18,-169.09 Z" fill="#fff" stroke="#fff" stroke-width="10" stroke-linejoin="round"/><circle r="194" fill="#fff"/></g><g class="a servo" style="animation-delay:0.32s"><path d="M-89.49,-127.84 L89.49,-127.84 A38.35,38.35 0 0 1 127.84,-89.49 L127.84,89.49 A38.35,38.35 0 0 1 89.49,127.84 L-89.49,127.84 A38.35,38.35 0 0 1 -127.84,89.49 L-127.84,-89.49 A38.35,38.35 0 0 1 -89.49,-127.84 Z" transform="rotate(22.5)" fill="#fff" stroke="#000" stroke-width="16"/></g><g class="a servo" style="animation-delay:0.16s"><path d="M-59.06,-84.37 L59.06,-84.37 A25.31,25.31 0 0 1 84.37,-59.06 L84.37,59.06 A25.31,25.31 0 0 1 59.06,84.37 L-59.06,84.37 A25.31,25.31 0 0 1 -84.37,59.06 L-84.37,-59.06 A25.31,25.31 0 0 1 -59.06,-84.37 Z" transform="rotate(45)" fill="#fff" stroke="#000" stroke-width="16"/></g><g class="a servo" style="animation-delay:0s"><g class="a spark"><path d="M-33.07,-47.25 L33.07,-47.25 A14.17,14.17 0 0 1 47.25,-33.07 L47.25,33.07 A14.17,14.17 0 0 1 33.07,47.25 L-33.07,47.25 A14.17,14.17 0 0 1 -47.25,33.07 L-47.25,-33.07 A14.17,14.17 0 0 1 -33.07,-47.25 Z" transform="rotate(67.5)" fill="#fff" stroke="#000" stroke-width="16"/></g></g></mask><g mask="url(#ra)"><g class="a gear" style="animation-delay:0.48s"><path d="M-32.9,-185.1 L-28.15,-212.14 L28.15,-212.14 L32.9,-185.1 L82.18,-169.09 L101.91,-188.17 L147.47,-155.08 L135.42,-130.41 L165.87,-88.49 L193.06,-92.33 L210.46,-38.78 L186.21,-25.9 L186.21,25.9 L210.46,38.78 L193.06,92.33 L165.87,88.49 L135.42,130.41 L147.47,155.08 L101.91,188.17 L82.18,169.09 L32.9,185.1 L28.15,212.14 L-28.15,212.14 L-32.9,185.1 L-82.18,169.09 L-101.91,188.17 L-147.47,155.08 L-135.42,130.41 L-165.87,88.49 L-193.06,92.33 L-210.46,38.78 L-186.21,25.9 L-186.21,-25.9 L-210.46,-38.78 L-193.06,-92.33 L-165.87,-88.49 L-135.42,-130.41 L-147.47,-155.08 L-101.91,-188.17 L-82.18,-169.09 Z" fill="#D9342B" stroke="#D9342B" stroke-width="10" stroke-linejoin="round"/><circle r="194" fill="#D9342B"/></g><g class="a servo" style="animation-delay:0.32s"><path d="M-89.49,-127.84 L89.49,-127.84 A38.35,38.35 0 0 1 127.84,-89.49 L127.84,89.49 A38.35,38.35 0 0 1 89.49,127.84 L-89.49,127.84 A38.35,38.35 0 0 1 -127.84,89.49 L-127.84,-89.49 A38.35,38.35 0 0 1 -89.49,-127.84 Z" transform="rotate(22.5)" fill="#EE4F2C"/></g><g class="a servo" style="animation-delay:0.16s"><path d="M-59.06,-84.37 L59.06,-84.37 A25.31,25.31 0 0 1 84.37,-59.06 L84.37,59.06 A25.31,25.31 0 0 1 59.06,84.37 L-59.06,84.37 A25.31,25.31 0 0 1 -84.37,59.06 L-84.37,-59.06 A25.31,25.31 0 0 1 -59.06,-84.37 Z" transform="rotate(45)" fill="#FF8A1F"/></g><g class="a servo" style="animation-delay:0s"><g class="a spark"><path d="M-33.07,-47.25 L33.07,-47.25 A14.17,14.17 0 0 1 47.25,-33.07 L47.25,33.07 A14.17,14.17 0 0 1 33.07,47.25 L-33.07,47.25 A14.17,14.17 0 0 1 -47.25,33.07 L-47.25,-33.07 A14.17,14.17 0 0 1 -33.07,-47.25 Z" transform="rotate(67.5)" fill="#3DDCFF"/></g></g></g><circle class="a ripple" r="60.95" fill="none" stroke="#3DDCFF" stroke-width="14" opacity="0"/>
+</svg>
