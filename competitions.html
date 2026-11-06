@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" dir="ltr" data-lang="en">
+<html lang="en" dir="ltr" data-lang="en" data-url-lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -10,23 +10,36 @@
 <meta property="og:image" content="https://ward00al-khatib.github.io/img/wro-syria-team.jpg">
 <meta property="og:url" content="https://ward00al-khatib.github.io/competitions.html">
 <meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="ar_SY">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://ward00al-khatib.github.io/competitions.html">
+<link rel="alternate" hreflang="en" href="https://ward00al-khatib.github.io/competitions.html">
+<link rel="alternate" hreflang="ar" href="https://ward00al-khatib.github.io/ar/competitions.html">
+<link rel="alternate" hreflang="x-default" href="https://ward00al-khatib.github.io/competitions.html">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="img/brand/roze-icon-small.svg">
 <link rel="apple-touch-icon" href="img/brand/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&family=Noto+Kufi+Arabic:wght@600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
 <link rel="stylesheet" href="assets/site.css">
 <script>
-/* pick the language before the page paints: #ar / #en link, then the visitor's last choice, then the browser language */
+/* language before the page paints. Each language has its own pages (English at the root, Arabic under /ar/),
+   so search engines see two sites. An old #ar / #en link, then the visitor's last choice, then an Arabic
+   browser (only from an English page) moves to the matching page; otherwise the page keeps its own language. */
 (function(){
-  var l = "en";
-  try { var s = localStorage.getItem("wa-lang"); if (s === "ar" || s === "en") l = s;
-        else if ((navigator.languages || [navigator.language || ""]).some(function(x){ return /^ar\b/i.test(x); })) l = "ar"; } catch (e) {}
-  if (location.hash === "#ar") l = "ar"; else if (location.hash === "#en") l = "en";
-  var r = document.documentElement; r.setAttribute("data-lang", l); r.lang = l; r.dir = l === "ar" ? "rtl" : "ltr";
+  var r = document.documentElement, here = r.getAttribute("data-url-lang") || "en", want = null;
+  try { var s = localStorage.getItem("wa-lang"); if (s === "ar" || s === "en") want = s; } catch (e) {}
+  if (!want && here === "en" && (navigator.languages || [navigator.language || ""]).some(function(x){ return /^ar\b/i.test(x); })) want = "ar";
+  if (location.hash === "#ar") want = "ar"; else if (location.hash === "#en") want = "en";
+  if (want && want !== here) {
+    var alt = document.querySelector('link[rel="alternate"][hreflang="' + want + '"]');
+    if (alt) {
+      try { localStorage.setItem("wa-lang", want); } catch (e) {}
+      location.replace(new URL(alt.href).pathname + (/^#(ar|en)$/.test(location.hash) ? "" : location.hash));
+      return;
+    }
+  }
+  r.setAttribute("data-lang", here); r.lang = here; r.dir = here === "ar" ? "rtl" : "ltr";
 })();
 </script>
 </head>
@@ -130,17 +143,17 @@
   <div class="wrap">
     <div class="sec-head"><p class="label"><span class="en">Photos</span><span class="ar">صور</span></p></div>
     <div class="gallery">
-      <figure class="shot"><button type="button"><img src="img/portrait-medal.jpg" width="960" height="1280" loading="lazy" alt="Ward Alkhatib holding medals and the WRO 2023 trophy" data-ar-alt="ورد الخطيب يحمل الميداليات ودرع WRO 2023"></button>
+      <figure class="shot"><button type="button"><img src="img/portrait-medal.jpg" width="960" height="1280" loading="lazy" alt="Ward Alkhatib holding medals and the WRO 2023 trophy" data-ar-alt="ورد الخطيب يحمل الميداليات ودرع WRO 2023" srcset="img/sm/portrait-medal-640.webp 640w, img/portrait-medal.jpg 960w" sizes="(max-width: 700px) 92vw, 351px"></button>
         <figcaption><span><span class="en">After the WRO 2023 final</span><span class="ar">بعد نهائي WRO 2023</span></span></figcaption></figure>
-      <figure class="shot"><button type="button"><img src="img/wro-team-h2a.jpg" width="960" height="1280" loading="lazy" alt="Ward with team members in WRO Syria shirts" data-ar-alt="ورد مع أعضاء الفريق بقمصان WRO سوريا"></button>
+      <figure class="shot"><button type="button"><img src="img/wro-team-h2a.jpg" width="960" height="1280" loading="lazy" alt="Ward with team members in WRO Syria shirts" data-ar-alt="ورد مع أعضاء الفريق بقمصان WRO سوريا" srcset="img/sm/wro-team-h2a-640.webp 640w, img/wro-team-h2a.jpg 960w" sizes="(max-width: 700px) 92vw, 351px"></button>
         <figcaption><span><span class="en">With the team at WRO Syria</span><span class="ar">مع الفريق في WRO سوريا</span></span></figcaption></figure>
-      <figure class="shot"><button type="button"><img src="img/wro-syria-team.jpg" width="1400" height="1139" loading="lazy" alt="Students at the WRO Syria national robotics championship" data-ar-alt="طلاب في البطولة الوطنية لعلوم الروبوت WRO سوريا"></button>
+      <figure class="shot"><button type="button"><img src="img/wro-syria-team.jpg" width="1400" height="1139" loading="lazy" alt="Students at the WRO Syria national robotics championship" data-ar-alt="طلاب في البطولة الوطنية لعلوم الروبوت WRO سوريا" srcset="img/sm/wro-syria-team-640.webp 640w, img/sm/wro-syria-team-1280.webp 1280w" sizes="(max-width: 700px) 92vw, 351px"></button>
         <figcaption><span><span class="en">WRO Syria national championship</span><span class="ar">البطولة الوطنية WRO سوريا</span></span></figcaption></figure>
-      <figure class="shot"><button type="button"><img src="img/wro-syria-gold.jpg" width="1280" height="853" loading="lazy" alt="Team Astronauts with gold medals and their coach at WRO Syria 2023" data-ar-alt="فريق Astronauts بالميداليات الذهبية مع مدرّبه في WRO سوريا 2023"></button>
+      <figure class="shot"><button type="button"><img src="img/wro-syria-gold.jpg" width="1280" height="853" loading="lazy" alt="Team Astronauts with gold medals and their coach at WRO Syria 2023" data-ar-alt="فريق Astronauts بالميداليات الذهبية مع مدرّبه في WRO سوريا 2023" srcset="img/sm/wro-syria-gold-640.webp 640w, img/sm/wro-syria-gold-1280.webp 1280w" sizes="(max-width: 700px) 92vw, 351px"></button>
         <figcaption><span><span class="en">Gold at WRO Syria 2023, team Astronauts</span><span class="ar">ذهبية WRO سوريا 2023، فريق Astronauts</span></span></figcaption></figure>
-      <figure class="shot"><button type="button"><img src="img/arc-track.jpg" width="1400" height="1050" loading="lazy" alt="Practice on the ARC competition mat" data-ar-alt="تمرين على بساط مسابقة ARC"></button>
+      <figure class="shot"><button type="button"><img src="img/arc-track.jpg" width="1400" height="1050" loading="lazy" alt="Practice on the ARC competition mat" data-ar-alt="تمرين على بساط مسابقة ARC" srcset="img/sm/arc-track-640.webp 640w, img/sm/arc-track-1280.webp 1280w" sizes="(max-width: 700px) 92vw, 351px"></button>
         <figcaption><span><span class="en">Practice on the ARC competition mat</span><span class="ar">تمرين على بساط مسابقة ARC</span></span></figcaption></figure>
-      <figure class="shot"><button type="button"><img src="img/3d-printed-part.jpg" width="1400" height="1162" loading="lazy" alt="Holding up a large 3D-printed part" data-ar-alt="قطعة كبيرة مطبوعة ثلاثياً"></button>
+      <figure class="shot"><button type="button"><img src="img/3d-printed-part.jpg" width="1400" height="1162" loading="lazy" alt="Holding up a large 3D-printed part" data-ar-alt="قطعة كبيرة مطبوعة ثلاثياً" srcset="img/sm/3d-printed-part-640.webp 640w, img/sm/3d-printed-part-1280.webp 1280w" sizes="(max-width: 700px) 92vw, 351px"></button>
         <figcaption><span><span class="en">A 3D-printed competition part</span><span class="ar">قطعة مسابقة مطبوعة ثلاثياً</span></span></figcaption></figure>
     </div>
   </div>
@@ -154,7 +167,7 @@
 <footer>
   <div class="wrap">
     <span><span class="en">© 2026 Ward Alkhatib</span><span class="ar">© 2026 ورد الخطيب</span></span>
-    <span><span class="en">Mechatronics · Robotics · Community</span><span class="ar">ميكاترونيكس · روبوتيك · مجتمع</span></span>
+    <span><span class="en">Mechatronics · Robotics · Community</span><span class="ar">ميكاترونيك · روبوتيك · مجتمع</span></span>
   </div>
 </footer>
 <dialog class="lb" id="lb" aria-label="Photo viewer">

@@ -29,6 +29,7 @@
 
   /* ---- first visit to the home page: a short system check, once per session ---- */
   if (root.classList.contains("boot")){
+    root.classList.add("booting");
     var ar = root.getAttribute("data-lang") === "ar";
     var lines = ar ? ["فحص التشغيل الذاتي", "عُقد ROS 2", "YOLOv8 · 4 أصناف", "ذراع 5 درجات حرية · 6× MG996R", "الجنازير · 4 محركات 12 فولت", "جاهز للفرز"]
                    : ["Power-on self test", "ROS 2 nodes", "YOLOv8 · 4 classes", "5-DOF arm · 6× MG996R", "Tracks · 4× 12 V motors", "Ready to sort"];
@@ -42,12 +43,12 @@
     var finish = function(){
       if (booted) return; booted = true;
       try { sessionStorage.setItem("wa-boot", "1"); } catch (e) {}
-      boot.classList.add("out"); root.classList.remove("boot");
+      boot.classList.add("out"); root.classList.remove("boot", "booting"); window.dispatchEvent(new Event("wa-booted"));
       setTimeout(function(){ boot.remove(); }, 900);
     };
     requestAnimationFrame(function(){ requestAnimationFrame(function(){ boot.querySelector(".boot-bar i").style.width = "100%"; }); });
-    $$("li", boot).forEach(function(li, i){ setTimeout(function(){ li.classList.add("on"); }, 140 + i * 200); });
-    setTimeout(finish, 1800);
+    $$("li", boot).forEach(function(li, i){ setTimeout(function(){ li.classList.add("on"); }, 100 + i * 120); });
+    setTimeout(finish, 1100);
     boot.querySelector(".boot-skip").addEventListener("click", finish);
     addEventListener("keydown", finish, { once: true });
   }

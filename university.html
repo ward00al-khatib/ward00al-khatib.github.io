@@ -1,32 +1,45 @@
 <!doctype html>
-<html lang="en" dir="ltr" data-lang="en">
+<html lang="en" dir="ltr" data-lang="en" data-url-lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>University projects · Ward Alkhatib</title>
-<meta name="description" content="Ward Alkhatib's mechatronics work at Homs University, 2018–2026: WALL-E Junior and the Robotics Club.">
+<meta name="description" content="Ward Alkhatib's mechatronics work at Homs University, 2018–2027: WALL-E Junior and the Robotics Club.">
 <meta property="og:title" content="University projects · Ward Alkhatib">
-<meta property="og:description" content="Ward Alkhatib's mechatronics work at Homs University, 2018–2026: WALL-E Junior and the Robotics Club.">
+<meta property="og:description" content="Ward Alkhatib's mechatronics work at Homs University, 2018–2027: WALL-E Junior and the Robotics Club.">
 <meta property="og:image" content="https://ward00al-khatib.github.io/img/robotics-club.jpg">
 <meta property="og:url" content="https://ward00al-khatib.github.io/university.html">
 <meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="ar_SY">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://ward00al-khatib.github.io/university.html">
+<link rel="alternate" hreflang="en" href="https://ward00al-khatib.github.io/university.html">
+<link rel="alternate" hreflang="ar" href="https://ward00al-khatib.github.io/ar/university.html">
+<link rel="alternate" hreflang="x-default" href="https://ward00al-khatib.github.io/university.html">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="img/brand/roze-icon-small.svg">
 <link rel="apple-touch-icon" href="img/brand/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&family=Noto+Kufi+Arabic:wght@600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
 <link rel="stylesheet" href="assets/site.css">
 <script>
-/* pick the language before the page paints: #ar / #en link, then the visitor's last choice, then the browser language */
+/* language before the page paints. Each language has its own pages (English at the root, Arabic under /ar/),
+   so search engines see two sites. An old #ar / #en link, then the visitor's last choice, then an Arabic
+   browser (only from an English page) moves to the matching page; otherwise the page keeps its own language. */
 (function(){
-  var l = "en";
-  try { var s = localStorage.getItem("wa-lang"); if (s === "ar" || s === "en") l = s;
-        else if ((navigator.languages || [navigator.language || ""]).some(function(x){ return /^ar\b/i.test(x); })) l = "ar"; } catch (e) {}
-  if (location.hash === "#ar") l = "ar"; else if (location.hash === "#en") l = "en";
-  var r = document.documentElement; r.setAttribute("data-lang", l); r.lang = l; r.dir = l === "ar" ? "rtl" : "ltr";
+  var r = document.documentElement, here = r.getAttribute("data-url-lang") || "en", want = null;
+  try { var s = localStorage.getItem("wa-lang"); if (s === "ar" || s === "en") want = s; } catch (e) {}
+  if (!want && here === "en" && (navigator.languages || [navigator.language || ""]).some(function(x){ return /^ar\b/i.test(x); })) want = "ar";
+  if (location.hash === "#ar") want = "ar"; else if (location.hash === "#en") want = "en";
+  if (want && want !== here) {
+    var alt = document.querySelector('link[rel="alternate"][hreflang="' + want + '"]');
+    if (alt) {
+      try { localStorage.setItem("wa-lang", want); } catch (e) {}
+      location.replace(new URL(alt.href).pathname + (/^#(ar|en)$/.test(location.hash) ? "" : location.hash));
+      return;
+    }
+  }
+  r.setAttribute("data-lang", here); r.lang = here; r.dir = here === "ar" ? "rtl" : "ltr";
 })();
 </script>
 </head>
@@ -66,16 +79,16 @@
 <div class="page-head">
   <div class="wrap">
     <p class="crumb"><a href="index.html"><span class="en">Home</span><span class="ar">الرئيسية</span></a><span aria-hidden="true">/</span><span class="en">University projects</span><span class="ar">المشاريع الجامعية</span></p>
-    <p class="eyebrow"><span class="en">Homs University · Mechatronics · 2018–2026</span><span class="ar">جامعة حمص · الميكاترونيك · 2018–2026</span></p>
+    <p class="eyebrow"><span class="en">Homs University · Mechatronics · 2018–2027</span><span class="ar">جامعة حمص · الميكاترونيك · 2018–2027</span></p>
     <h1 class="page-title"><span class="en">University projects</span><span class="ar">المشاريع الجامعية</span></h1>
-    <p class="page-lead"><span class="en">My degree in Mechatronics, Robotics and Automation Engineering at the Faculty of Mechanical and Electrical Engineering: the graduation robot, control-systems projects, and the Robotics Club.</span><span class="ar">دراستي في هندسة الميكاترونيكس والروبوتيك والأتمتة في كلية الهندسة الميكانيكية والكهربائية: روبوت التخرج، ومشاريع أنظمة التحكم، ونادي الروبوتيك.</span></p>
+    <p class="page-lead"><span class="en">My degree in Mechatronics, Robotics and Automation Engineering at the Faculty of Mechanical and Electrical Engineering: the graduation robot, control-systems projects, and the Robotics Club.</span><span class="ar">دراستي في هندسة الميكاترونيك والروبوتيك والأتمتة في كلية الهندسة الميكانيكية والكهربائية: روبوت التخرج، ومشاريع أنظمة التحكم، ونادي الروبوتيك.</span></p>
   </div>
 </div>
 <section id="projects">
   <div class="wrap">
     <div class="uni">
       <a class="uni-card feature" href="graduation.html">
-        <span class="uni-pic dark"><img src="img/walle-front.jpg" alt="" loading="lazy"></span>
+        <span class="uni-pic dark"><img width="1200" height="1104" src="img/walle-front.jpg" alt="" loading="lazy" srcset="img/sm/walle-front-640.webp 640w, img/walle-front.jpg 1200w" sizes="(max-width: 700px) 91vw, 578px"></span>
         <span class="uni-body">
           <small><span class="en">Graduation project · 2025–2026</span><span class="ar">مشروع التخرج · 2025–2026</span></small>
           <b>WALL-E Junior</b>
@@ -84,7 +97,7 @@
         </span>
       </a>
       <div class="uni-card">
-        <span class="uni-pic light"><img src="img/robotics-club.jpg" alt="Robotics Club logo, Al-Baath University (now Homs University)" data-ar-alt="شعار نادي الروبوتيك في جامعة البعث (جامعة حمص حالياً)" loading="lazy"></span>
+        <span class="uni-pic light"><img width="1200" height="483" src="img/robotics-club.jpg" alt="Robotics Club logo, Al-Baath University (now Homs University)" data-ar-alt="شعار نادي الروبوتيك في جامعة البعث (جامعة حمص حالياً)" loading="lazy" srcset="img/sm/robotics-club-640.webp 640w, img/robotics-club.jpg 1200w" sizes="(max-width: 700px) 91vw, 482px"></span>
         <span class="uni-body">
           <small><span class="en">Activities</span><span class="ar">نشاطات</span></small>
           <b><span class="en">Robotics Club supervisor</span><span class="ar">مشرف نادي الروبوتيك</span></b>
@@ -125,13 +138,13 @@
         <figcaption><span class="en">The closed loop: the PID controller drives the motor until the measured frequency matches the reference.</span><span class="ar">الحلقة المغلقة: يحرّك متحكم PID المحرك حتى يطابق التردد المقاس التردد المرجعي.</span></figcaption>
       </figure>
       <div class="gallery cproj-shots">
-        <figure class="shot"><button type="button"><img src="img/uni-tuner-concept.jpg" width="800" height="427" loading="lazy" alt="Concept sketch: guitar, gain amplifier, frequency detection, motor and display" data-ar-alt="رسم الفكرة: الغيتار ومضخّم الكسب وكشف التردد والمحرك والشاشة"></button>
+        <figure class="shot"><button type="button"><img src="img/uni-tuner-concept.jpg" width="800" height="427" loading="lazy" alt="Concept sketch: guitar, gain amplifier, frequency detection, motor and display" data-ar-alt="رسم الفكرة: الغيتار ومضخّم الكسب وكشف التردد والمحرك والشاشة" srcset="img/sm/uni-tuner-concept-640.webp 640w, img/uni-tuner-concept.jpg 800w" sizes="(max-width: 700px) 44vw, 260px"></button>
           <figcaption><span><span class="en">System concept: pickup, amplifier, frequency detection and motor</span><span class="ar">فكرة النظام: اللاقط والمضخّم وكشف التردد والمحرك</span></span><span class="cat"><span class="en">Concept</span><span class="ar">الفكرة</span></span></figcaption></figure>
-        <figure class="shot"><button type="button"><img src="img/uni-tuner-model.jpg" width="800" height="280" loading="lazy" alt="Simulink block diagram of the tuning loop" data-ar-alt="مخطط Simulink لحلقة الضبط"></button>
+        <figure class="shot"><button type="button"><img src="img/uni-tuner-model.jpg" width="800" height="280" loading="lazy" alt="Simulink block diagram of the tuning loop" data-ar-alt="مخطط Simulink لحلقة الضبط" srcset="img/sm/uni-tuner-model-640.webp 640w, img/uni-tuner-model.jpg 800w" sizes="(max-width: 700px) 44vw, 260px"></button>
           <figcaption><span><span class="en">The Simulink model of the tuning loop</span><span class="ar">نموذج Simulink لحلقة الضبط</span></span><span class="cat"><span class="en">Simulink</span><span class="ar">Simulink</span></span></figcaption></figure>
-        <figure class="shot"><button type="button"><img src="img/uni-tuner-scopes.jpg" width="800" height="458" loading="lazy" alt="Simulation scope windows showing the loop signals" data-ar-alt="نوافذ المحاكاة تعرض إشارات الحلقة"></button>
+        <figure class="shot"><button type="button"><img src="img/uni-tuner-scopes.jpg" width="800" height="458" loading="lazy" alt="Simulation scope windows showing the loop signals" data-ar-alt="نوافذ المحاكاة تعرض إشارات الحلقة" srcset="img/sm/uni-tuner-scopes-640.webp 640w, img/uni-tuner-scopes.jpg 800w" sizes="(max-width: 700px) 44vw, 260px"></button>
           <figcaption><span><span class="en">Simulation scopes: the signals around the loop</span><span class="ar">شاشات المحاكاة: الإشارات عبر الحلقة</span></span><span class="cat"><span class="en">Results</span><span class="ar">النتائج</span></span></figcaption></figure>
-        <figure class="shot"><button type="button"><img src="img/uni-tuner-step.jpg" width="800" height="449" loading="lazy" alt="Scope windows with the response of the loop" data-ar-alt="نوافذ المحاكاة مع استجابة الحلقة"></button>
+        <figure class="shot"><button type="button"><img src="img/uni-tuner-step.jpg" width="800" height="449" loading="lazy" alt="Scope windows with the response of the loop" data-ar-alt="نوافذ المحاكاة مع استجابة الحلقة" srcset="img/sm/uni-tuner-step-640.webp 640w, img/uni-tuner-step.jpg 800w" sizes="(max-width: 700px) 44vw, 260px"></button>
           <figcaption><span><span class="en">Response of the loop in simulation</span><span class="ar">استجابة الحلقة في المحاكاة</span></span><span class="cat"><span class="en">Results</span><span class="ar">النتائج</span></span></figcaption></figure>
       </div>
     </article>
@@ -157,17 +170,17 @@
         <figcaption><span class="en">The conversion chain. MPPT reads the shaft speed and sets the generator's load torque so the tip-speed ratio stays at its optimum.</span><span class="ar">سلسلة التحويل: يقرأ MPPT سرعة العمود ويضبط عزم الحمل على المولّد لتبقى نسبة سرعة الطرف عند قيمتها المثلى.</span></figcaption>
       </figure>
       <div class="gallery cproj-shots three">
-        <figure class="shot photo"><button type="button"><img src="img/uni-wind-turbine.jpg" width="1024" height="1365" loading="lazy" alt="Illustrated cutaway of a wind turbine with its main parts labelled" data-ar-alt="رسم مقطعي لعنفة رياح مع أسماء أجزائها"></button>
+        <figure class="shot photo"><button type="button"><img src="img/uni-wind-turbine.jpg" width="1024" height="1365" loading="lazy" alt="Illustrated cutaway of a wind turbine with its main parts labelled" data-ar-alt="رسم مقطعي لعنفة رياح مع أسماء أجزائها" srcset="img/sm/uni-wind-turbine-640.webp 640w, img/uni-wind-turbine.jpg 1024w" sizes="(max-width: 700px) 44vw, 351px"></button>
           <figcaption><span><span class="en">Inside the turbine: blades, rotor, gearbox, generator</span><span class="ar">داخل العنفة: الشفرات والدوّار وعلبة السرعة والمولّد</span></span><span class="cat"><span class="en">Illustration</span><span class="ar">رسم توضيحي</span></span></figcaption></figure>
-        <figure class="shot"><button type="button"><img src="img/uni-wind-cp.jpg" width="800" height="525" loading="lazy" alt="MATLAB plot of power coefficient curves for several pitch angles" data-ar-alt="رسم MATLAB لمنحنيات معامل القدرة عند عدة زوايا ميل"></button>
+        <figure class="shot"><button type="button"><img src="img/uni-wind-cp.jpg" width="800" height="525" loading="lazy" alt="MATLAB plot of power coefficient curves for several pitch angles" data-ar-alt="رسم MATLAB لمنحنيات معامل القدرة عند عدة زوايا ميل" srcset="img/sm/uni-wind-cp-640.webp 640w, img/uni-wind-cp.jpg 800w" sizes="(max-width: 700px) 44vw, 351px"></button>
           <figcaption><span><span class="en">Cp curves for different blade pitch angles</span><span class="ar">منحنيات Cp لزوايا ميل مختلفة للشفرات</span></span><span class="cat"><span class="en">MATLAB</span><span class="ar">MATLAB</span></span></figcaption></figure>
-        <figure class="shot"><button type="button"><img src="img/uni-wind-control.jpg" width="800" height="500" loading="lazy" alt="Block diagram of the MPPT control structure" data-ar-alt="مخطط صندوقي لبنية التحكم MPPT"></button>
+        <figure class="shot"><button type="button"><img src="img/uni-wind-control.jpg" width="800" height="500" loading="lazy" alt="Block diagram of the MPPT control structure" data-ar-alt="مخطط صندوقي لبنية التحكم MPPT" srcset="img/sm/uni-wind-control-640.webp 640w, img/uni-wind-control.jpg 800w" sizes="(max-width: 700px) 44vw, 351px"></button>
           <figcaption><span><span class="en">The MPPT control structure: Cp, torque and speed</span><span class="ar">بنية التحكم MPPT: معامل القدرة والعزم والسرعة</span></span><span class="cat"><span class="en">Control</span><span class="ar">التحكم</span></span></figcaption></figure>
-        <figure class="shot"><button type="button"><img src="img/uni-wind-model.jpg" width="800" height="838" loading="lazy" alt="Simulink model of the wind energy conversion system" data-ar-alt="نموذج Simulink لنظام تحويل طاقة الرياح"></button>
+        <figure class="shot"><button type="button"><img src="img/uni-wind-model.jpg" width="800" height="838" loading="lazy" alt="Simulink model of the wind energy conversion system" data-ar-alt="نموذج Simulink لنظام تحويل طاقة الرياح" srcset="img/sm/uni-wind-model-640.webp 640w, img/uni-wind-model.jpg 800w" sizes="(max-width: 700px) 44vw, 351px"></button>
           <figcaption><span><span class="en">The Simulink model of the conversion chain</span><span class="ar">نموذج Simulink لسلسلة التحويل</span></span><span class="cat"><span class="en">Simulink</span><span class="ar">Simulink</span></span></figcaption></figure>
-        <figure class="shot"><button type="button"><img src="img/uni-mppt-curve.jpg" width="933" height="1400" loading="lazy" alt="Infographic: the turbine efficiency curve peaks at one tip-speed ratio" data-ar-alt="إنفوغرافيك: منحنى كفاءة العنفة يبلغ ذروته عند نسبة واحدة لسرعة الطرف"></button>
+        <figure class="shot"><button type="button"><img src="img/uni-mppt-curve.jpg" width="933" height="1400" loading="lazy" alt="Infographic: the turbine efficiency curve peaks at one tip-speed ratio" data-ar-alt="إنفوغرافيك: منحنى كفاءة العنفة يبلغ ذروته عند نسبة واحدة لسرعة الطرف" srcset="img/sm/uni-mppt-curve-640.webp 640w, img/uni-mppt-curve.jpg 933w" sizes="(max-width: 700px) 44vw, 351px"></button>
           <figcaption><span><span class="en">Follow-up: maximum power only at the optimal tip-speed ratio</span><span class="ar">المتابعة: القدرة العظمى عند النسبة المثلى لسرعة الطرف فقط</span></span><span class="cat"><span class="en">Follow-up</span><span class="ar">المتابعة</span></span></figcaption></figure>
-        <figure class="shot"><button type="button"><img src="img/uni-mppt-response.jpg" width="933" height="1400" loading="lazy" alt="Infographic: system response under real wind, with lag and oscillation" data-ar-alt="إنفوغرافيك: استجابة النظام لرياح حقيقية مع تأخر وتذبذب"></button>
+        <figure class="shot"><button type="button"><img src="img/uni-mppt-response.jpg" width="933" height="1400" loading="lazy" alt="Infographic: system response under real wind, with lag and oscillation" data-ar-alt="إنفوغرافيك: استجابة النظام لرياح حقيقية مع تأخر وتذبذب" srcset="img/sm/uni-mppt-response-640.webp 640w, img/uni-mppt-response.jpg 933w" sizes="(max-width: 700px) 44vw, 351px"></button>
           <figcaption><span><span class="en">Follow-up: lag and oscillation under real wind</span><span class="ar">المتابعة: تأخر وتذبذب تحت رياح حقيقية</span></span><span class="cat"><span class="en">Follow-up</span><span class="ar">المتابعة</span></span></figcaption></figure>
       </div>
     </article>
@@ -183,7 +196,7 @@
 <footer>
   <div class="wrap">
     <span><span class="en">© 2026 Ward Alkhatib</span><span class="ar">© 2026 ورد الخطيب</span></span>
-    <span><span class="en">Mechatronics · Robotics · Community</span><span class="ar">ميكاترونيكس · روبوتيك · مجتمع</span></span>
+    <span><span class="en">Mechatronics · Robotics · Community</span><span class="ar">ميكاترونيك · روبوتيك · مجتمع</span></span>
   </div>
 </footer>
 

@@ -1008,7 +1008,7 @@ html[data-lang="ar"] .hud-label{font:600 12px/1.2 var(--f-body);letter-spacing:0
 
 /* first visit: a short system check before the hero */
 html.boot body{overflow:hidden}
-html.boot .top,html.boot main,html.boot footer{visibility:hidden;animation:boot-fail 0s 4.5s forwards}
+html.boot .top,html.boot main,html.boot footer{visibility:hidden;animation:boot-fail 0s 2.6s forwards}
 html.boot .name .ch{animation-play-state:paused}
 @keyframes boot-fail{to{visibility:visible}}
 .boot-screen{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:radial-gradient(600px 400px at 50% 45%,rgba(255,138,31,.08),transparent 70%),#05070d;color:var(--ink);clip-path:inset(0 0 0 0);transition:clip-path .75s cubic-bezier(.7,0,.2,1),opacity .75s}
@@ -1059,4 +1059,22 @@ html[data-lang="ar"] .sw{padding-block:.3em;margin-block:-.3em}
 @media print{
   .progress,.glow-cursor,.fxbg,.marquee{display:none !important}
   .hero,.page-head,.band,.linen,footer{background:#fff}
+}
+
+/* ---------- ROZE: try it and read the booklet ---------- */
+.rose-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+
+/* ---------- phones: the toolkit table becomes one card per row, and small labels stay readable ---------- */
+@media (max-width:640px){
+  .bom-wrap{overflow:visible}
+  .bom{min-width:0}
+  .bom thead{display:none}
+  .bom,.bom tbody,.bom tr,.bom td{display:block;width:auto}
+  .bom tr{display:grid;grid-template-columns:2.4em 1fr;column-gap:10px;padding:12px 14px;border-bottom:1px solid var(--rule)}
+  .bom tbody tr:last-child{border-bottom:0}
+  .bom td{padding:0;border:0}
+  .bom td:first-child{grid-row:span 2;width:auto}
+  .bom td:nth-child(2){width:auto}
+  .label,.crumb,.eyebrow,.tags,.mcat,.tools,dt,th,figcaption,cite,footer .wrap > span{font-size:13px}
+  dt span,th span,figcaption span,small + strong,small + strong span{font-size:13px}
 }

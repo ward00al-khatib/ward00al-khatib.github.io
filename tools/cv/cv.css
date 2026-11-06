@@ -1,0 +1,32 @@
+/* CV for print: one A4 page, white, black text, one accent line. Same fonts as the site, served from the site. */
+@page { size: A4; margin: 10mm 14mm 8mm; }
+* { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+html, body { margin: 0; background: #fff; color: #14161b; }
+body { font: 400 8.8pt/1.38 "Inter", "IBM Plex Sans Arabic", sans-serif; }
+html[lang="ar"] body { font-family: "IBM Plex Sans Arabic", "Inter", sans-serif; font-size: 9pt; line-height: 1.46; }
+@media screen { body { max-width: 178mm; margin: 12mm auto; } }
+
+h1, h2 { font-family: "Space Grotesk", "Noto Kufi Arabic", sans-serif; font-weight: 700; margin: 0; }
+html[lang="ar"] h1, html[lang="ar"] h2 { font-family: "Noto Kufi Arabic", "Space Grotesk", sans-serif; }
+header { padding-bottom: 2.4mm; border-bottom: 1.6pt solid #14161b; }
+h1 { font-size: 21pt; line-height: 1.15; }
+.role { margin: 1mm 0 1.4mm; font-size: 11pt; font-weight: 600; color: #b55d00; }
+.contact { margin: 0; display: flex; flex-wrap: wrap; gap: .6mm 0; font-size: 8.8pt; color: #333; }
+.contact span + span::before { content: "·"; margin: 0 2mm; color: #999; }
+.ltr { direction: ltr; unicode-bidi: isolate; }
+.profile { margin: 2.4mm 0 0; }
+
+h2 { margin: 2.8mm 0 1.1mm; padding-bottom: .8mm; border-bottom: .6pt solid #999; font-size: 10.6pt; letter-spacing: .02em; text-transform: uppercase; }
+html[lang="ar"] h2 { text-transform: none; letter-spacing: 0; font-size: 11pt; }
+.item { margin: 0 0 1.3mm; break-inside: avoid; }
+.head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 1.5mm; }
+.when { margin-inline-start: auto; font-size: 8.8pt; color: #444; white-space: nowrap; }
+.where { margin: .2mm 0 0; color: #333; }
+ul { margin: .5mm 0 0; padding-inline-start: 4.5mm; }
+li { margin: 0 0 .3mm; }
+ul.flat { margin-top: 0; }
+table.skills { width: 100%; border-collapse: collapse; }
+.skills th { width: 40mm; text-align: start; font-weight: 600; vertical-align: top; padding: .7mm 3mm .7mm 0; }
+html[lang="ar"] .skills th { padding: .7mm 0 .7mm 3mm; }
+.skills td { padding: .7mm 0; color: #222; }
+.skills tr + tr th, .skills tr + tr td { border-top: .4pt solid #ddd; }

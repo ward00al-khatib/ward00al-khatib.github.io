@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" dir="ltr" data-lang="en">
+<html lang="en" dir="ltr" data-lang="en" data-url-lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -10,23 +10,36 @@
 <meta property="og:image" content="https://ward00al-khatib.github.io/img/walle-front.jpg">
 <meta property="og:url" content="https://ward00al-khatib.github.io/graduation.html">
 <meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="ar_SY">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://ward00al-khatib.github.io/graduation.html">
+<link rel="alternate" hreflang="en" href="https://ward00al-khatib.github.io/graduation.html">
+<link rel="alternate" hreflang="ar" href="https://ward00al-khatib.github.io/ar/graduation.html">
+<link rel="alternate" hreflang="x-default" href="https://ward00al-khatib.github.io/graduation.html">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="img/brand/roze-icon-small.svg">
 <link rel="apple-touch-icon" href="img/brand/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&family=Noto+Kufi+Arabic:wght@600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
 <link rel="stylesheet" href="assets/site.css">
 <script>
-/* pick the language before the page paints: #ar / #en link, then the visitor's last choice, then the browser language */
+/* language before the page paints. Each language has its own pages (English at the root, Arabic under /ar/),
+   so search engines see two sites. An old #ar / #en link, then the visitor's last choice, then an Arabic
+   browser (only from an English page) moves to the matching page; otherwise the page keeps its own language. */
 (function(){
-  var l = "en";
-  try { var s = localStorage.getItem("wa-lang"); if (s === "ar" || s === "en") l = s;
-        else if ((navigator.languages || [navigator.language || ""]).some(function(x){ return /^ar\b/i.test(x); })) l = "ar"; } catch (e) {}
-  if (location.hash === "#ar") l = "ar"; else if (location.hash === "#en") l = "en";
-  var r = document.documentElement; r.setAttribute("data-lang", l); r.lang = l; r.dir = l === "ar" ? "rtl" : "ltr";
+  var r = document.documentElement, here = r.getAttribute("data-url-lang") || "en", want = null;
+  try { var s = localStorage.getItem("wa-lang"); if (s === "ar" || s === "en") want = s; } catch (e) {}
+  if (!want && here === "en" && (navigator.languages || [navigator.language || ""]).some(function(x){ return /^ar\b/i.test(x); })) want = "ar";
+  if (location.hash === "#ar") want = "ar"; else if (location.hash === "#en") want = "en";
+  if (want && want !== here) {
+    var alt = document.querySelector('link[rel="alternate"][hreflang="' + want + '"]');
+    if (alt) {
+      try { localStorage.setItem("wa-lang", want); } catch (e) {}
+      location.replace(new URL(alt.href).pathname + (/^#(ar|en)$/.test(location.hash) ? "" : location.hash));
+      return;
+    }
+  }
+  r.setAttribute("data-lang", here); r.lang = here; r.dir = here === "ar" ? "rtl" : "ltr";
 })();
 </script>
 </head>
@@ -76,8 +89,8 @@
   <div class="wrap">
     <div class="proj">
       <figure class="proj-main">
-        <img src="img/walle-graduation.jpg" width="1050" height="1400" loading="lazy" alt="WALL-E Junior wearing a graduation cap and sash in front of the engineering faculty" data-ar-alt="WALL-E Junior بقبعة ووشاح التخرج أمام كلية الهندسة">
-        <figcaption><span class="en">Graduation day, Faculty of Mechanical and Electrical Engineering</span><span class="ar">يوم التخرج، كلية الهندسة الميكانيكية والكهربائية</span></figcaption>
+        <img src="img/walle-graduation.jpg" width="1050" height="1400" loading="lazy" alt="WALL-E Junior wearing a graduation cap and sash in front of the engineering faculty" data-ar-alt="WALL-E Junior بقبعة ووشاح التخرج أمام كلية الهندسة" srcset="img/sm/walle-graduation-640.webp 640w, img/walle-graduation.jpg 1050w" sizes="(max-width: 700px) 92vw, 457px">
+        <figcaption><span class="en">Presenting the graduation project, Faculty of Mechanical and Electrical Engineering</span><span class="ar">يوم تقديم مشروع التخرج، كلية الهندسة الميكانيكية والكهربائية</span></figcaption>
       </figure>
       <div>
         <div class="proj-intro">
@@ -203,17 +216,17 @@
     <h3 class="sub-h"><span class="en">From CAD <em>to</em> robot</span><span class="ar">من التصميم <em>إلى</em> التنفيذ</span></h3>
     <p class="sub-intro"><span class="en">The arm went from a SolidWorks assembly to the finished part. The tracks were built by hand from bicycle chains and sprockets.</span><span class="ar">انتقلت الذراع من تجميع على SolidWorks إلى قطعة منفّذة، وبُنيت الجنازير يدوياً من سلاسل دراجات هوائية ومسنّناتها.</span></p>
     <div class="build">
-      <figure><img class="cad" src="img/cad-arm.jpg" width="460" height="525" loading="lazy" alt="The 5-DOF arm assembly in SolidWorks" data-ar-alt="تجميع الذراع خماسية درجات الحرية على SolidWorks"><figcaption><span><span class="en">Arm assembly in SolidWorks</span><span class="ar">تجميع الذراع على SolidWorks</span></span><span class="tag"><span class="en">CAD</span><span class="ar">تصميم</span></span></figcaption></figure>
-      <figure><img class="fit" src="img/arm-built.jpg" width="736" height="1100" loading="lazy" alt="The finished arm standing upright on its base" data-ar-alt="الذراع بعد التنفيذ قائمة على قاعدتها"><figcaption><span><span class="en">The arm, built and assembled</span><span class="ar">الذراع بعد التنفيذ والتجميع</span></span><span class="tag"><span class="en">Build</span><span class="ar">تنفيذ</span></span></figcaption></figure>
-      <figure><img class="fit" src="img/arm-side.jpg" width="1053" height="702" loading="lazy" alt="Side view of the arm with the gripper and wrist servos" data-ar-alt="منظر جانبي للذراع مع الملقط ومحركات المعصم"><figcaption><span><span class="en">Gripper and wrist servos</span><span class="ar">الملقط ومحركات المعصم</span></span><span class="tag"><span class="en">Build</span><span class="ar">تنفيذ</span></span></figcaption></figure>
-      <figure><img src="img/build-sprocket.jpg" width="640" height="623" loading="lazy" alt="A bicycle sprocket mounted on a bearing" data-ar-alt="مسنّن دراجة مركّب على رولمان"><figcaption><span><span class="en">Sprocket mounted on a bearing</span><span class="ar">مسنّن مركّب على رولمان</span></span><span class="tag"><span class="en">Build</span><span class="ar">تنفيذ</span></span></figcaption></figure>
-      <figure><img src="img/build-treads.jpg" width="893" height="968" loading="lazy" alt="Tread plates being bolted onto a bicycle chain" data-ar-alt="تثبيت الدواسات بالبراغي على سلسلة دراجة"><figcaption><span><span class="en">Tread plates bolted onto the chain</span><span class="ar">دواسات مثبّتة بالبراغي على السلسلة</span></span><span class="tag"><span class="en">Build</span><span class="ar">تنفيذ</span></span></figcaption></figure>
-      <figure><img src="img/build-chain.jpg" width="893" height="852" loading="lazy" alt="Track sprockets and chain laid out on the drive plate" data-ar-alt="مسنّنات الجنزير والسلسلة على لوح الحركة"><figcaption><span><span class="en">Track sprockets and chain</span><span class="ar">مسنّنات الجنزير والسلسلة</span></span><span class="tag"><span class="en">Build</span><span class="ar">تنفيذ</span></span></figcaption></figure>
+      <figure><img class="cad" src="img/cad-arm.jpg" width="460" height="525" loading="lazy" alt="The 5-DOF arm assembly in SolidWorks" data-ar-alt="تجميع الذراع خماسية درجات الحرية على SolidWorks" srcset="img/sm/cad-arm-640.webp 460w" sizes="(max-width: 700px) 92vw, 351px"><figcaption><span><span class="en">Arm assembly in SolidWorks</span><span class="ar">تجميع الذراع على SolidWorks</span></span><span class="tag"><span class="en">CAD</span><span class="ar">تصميم</span></span></figcaption></figure>
+      <figure><img class="fit" src="img/arm-built.jpg" width="736" height="1100" loading="lazy" alt="The finished arm standing upright on its base" data-ar-alt="الذراع بعد التنفيذ قائمة على قاعدتها" srcset="img/sm/arm-built-640.webp 640w, img/arm-built.jpg 736w" sizes="(max-width: 700px) 92vw, 351px"><figcaption><span><span class="en">The arm, built and assembled</span><span class="ar">الذراع بعد التنفيذ والتجميع</span></span><span class="tag"><span class="en">Build</span><span class="ar">تنفيذ</span></span></figcaption></figure>
+      <figure><img class="fit" src="img/arm-side.jpg" width="1053" height="702" loading="lazy" alt="Side view of the arm with the gripper and wrist servos" data-ar-alt="منظر جانبي للذراع مع الملقط ومحركات المعصم" srcset="img/sm/arm-side-640.webp 640w, img/arm-side.jpg 1053w" sizes="(max-width: 700px) 92vw, 351px"><figcaption><span><span class="en">Gripper and wrist servos</span><span class="ar">الملقط ومحركات المعصم</span></span><span class="tag"><span class="en">Build</span><span class="ar">تنفيذ</span></span></figcaption></figure>
+      <figure><img src="img/build-sprocket.jpg" width="640" height="623" loading="lazy" alt="A bicycle sprocket mounted on a bearing" data-ar-alt="مسنّن دراجة مركّب على رولمان" srcset="img/sm/build-sprocket-640.webp 640w" sizes="(max-width: 700px) 92vw, 351px"><figcaption><span><span class="en">Sprocket mounted on a bearing</span><span class="ar">مسنّن مركّب على رولمان</span></span><span class="tag"><span class="en">Build</span><span class="ar">تنفيذ</span></span></figcaption></figure>
+      <figure><img src="img/build-treads.jpg" width="893" height="968" loading="lazy" alt="Tread plates being bolted onto a bicycle chain" data-ar-alt="تثبيت الدواسات بالبراغي على سلسلة دراجة" srcset="img/sm/build-treads-640.webp 640w, img/build-treads.jpg 893w" sizes="(max-width: 700px) 92vw, 351px"><figcaption><span><span class="en">Tread plates bolted onto the chain</span><span class="ar">دواسات مثبّتة بالبراغي على السلسلة</span></span><span class="tag"><span class="en">Build</span><span class="ar">تنفيذ</span></span></figcaption></figure>
+      <figure><img src="img/build-chain.jpg" width="893" height="852" loading="lazy" alt="Track sprockets and chain laid out on the drive plate" data-ar-alt="مسنّنات الجنزير والسلسلة على لوح الحركة" srcset="img/sm/build-chain-640.webp 640w, img/build-chain.jpg 893w" sizes="(max-width: 700px) 92vw, 351px"><figcaption><span><span class="en">Track sprockets and chain</span><span class="ar">مسنّنات الجنزير والسلسلة</span></span><span class="tag"><span class="en">Build</span><span class="ar">تنفيذ</span></span></figcaption></figure>
     </div>
 
     <div class="studio">
-      <figure><img src="img/walle-front.jpg" width="1200" height="1104" loading="lazy" alt="Front view of WALL-E Junior with the arm raised" data-ar-alt="منظر أمامي لـ WALL-E Junior والذراع مرفوعة"><figcaption><span class="en">Arm raised</span><span class="ar">الذراع مرفوعة</span></figcaption></figure>
-      <figure><img src="img/walle-label.jpg" width="1147" height="1200" loading="lazy" alt="WALL-E Junior with the arm lowered and the electronics visible" data-ar-alt="WALL-E Junior والذراع منخفضة والإلكترونيات ظاهرة"><figcaption><span class="en">Arm lowered, electronics visible</span><span class="ar">الذراع منخفضة والإلكترونيات ظاهرة</span></figcaption></figure>
+      <figure><img src="img/walle-front.jpg" width="1200" height="1104" loading="lazy" alt="Front view of WALL-E Junior with the arm raised" data-ar-alt="منظر أمامي لـ WALL-E Junior والذراع مرفوعة" srcset="img/sm/walle-front-640.webp 640w, img/walle-front.jpg 1200w" sizes="(max-width: 700px) 24vw, 454px"><figcaption><span class="en">Arm raised</span><span class="ar">الذراع مرفوعة</span></figcaption></figure>
+      <figure><img src="img/walle-label.jpg" width="1147" height="1200" loading="lazy" alt="WALL-E Junior with the arm lowered and the electronics visible" data-ar-alt="WALL-E Junior والذراع منخفضة والإلكترونيات ظاهرة" srcset="img/sm/walle-label-640.webp 640w, img/walle-label.jpg 1147w" sizes="(max-width: 700px) 24vw, 454px"><figcaption><span class="en">Arm lowered, electronics visible</span><span class="ar">الذراع منخفضة والإلكترونيات ظاهرة</span></figcaption></figure>
     </div>
   </div>
 </section>
@@ -226,7 +239,7 @@
 <footer>
   <div class="wrap">
     <span><span class="en">© 2026 Ward Alkhatib</span><span class="ar">© 2026 ورد الخطيب</span></span>
-    <span><span class="en">Mechatronics · Robotics · Community</span><span class="ar">ميكاترونيكس · روبوتيك · مجتمع</span></span>
+    <span><span class="en">Mechatronics · Robotics · Community</span><span class="ar">ميكاترونيك · روبوتيك · مجتمع</span></span>
   </div>
 </footer>
 

@@ -19,7 +19,17 @@
   }
   applyAlts(root.getAttribute("data-lang"));
   var langBtn = $("#lang-toggle");
-  if (langBtn) langBtn.addEventListener("click", function(){ setLang(root.getAttribute("data-lang") === "ar" ? "en" : "ar"); });
+  if (langBtn) langBtn.addEventListener("click", function(){
+    var next = root.getAttribute("data-lang") === "ar" ? "en" : "ar";
+    /* each language has its own page: go there, keeping the section the visitor is on */
+    var alt = document.querySelector('link[rel="alternate"][hreflang="' + next + '"]');
+    if (alt) {
+      try { localStorage.setItem("wa-lang", next); } catch (e) {}
+      location.href = new URL(alt.href).pathname + (/^#(ar|en)$/.test(location.hash) ? "" : location.hash);
+      return;
+    }
+    setLang(next);
+  });
 
   /* ---- phone menu closes after a pick ---- */
   var menu = $(".menu");
@@ -97,5 +107,17 @@
     };
     var fallback = function(){ var s = window.getSelection(), rg = document.createRange(); rg.selectNodeContents(phone); s.removeAllRanges(); s.addRange(rg); };
     try { navigator.clipboard.writeText("+963991050138").then(done, fallback); } catch (e) { fallback(); }
+  });
+
+  /* ---- copy email ---- */
+  var copyMail = $("#copy-email"), mail = $("#email");
+  if (copyMail && mail) copyMail.addEventListener("click", function(){
+    var done = function(){
+      var old = copyMail.innerHTML;
+      copyMail.innerHTML = '<span class="en">Copied</span><span class="ar">تم النسخ</span>';
+      setTimeout(function(){ copyMail.innerHTML = old; }, 1600);
+    };
+    var fallback = function(){ var s = window.getSelection(), rg = document.createRange(); rg.selectNodeContents(mail); s.removeAllRanges(); s.addRange(rg); };
+    try { navigator.clipboard.writeText(mail.textContent.trim()).then(done, fallback); } catch (e) { fallback(); }
   });
 })();

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" dir="ltr" data-lang="en">
+<html lang="en" dir="ltr" data-lang="en" data-url-lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -10,23 +10,36 @@
 <meta property="og:image" content="https://ward00al-khatib.github.io/img/portrait-medal.jpg">
 <meta property="og:url" content="https://ward00al-khatib.github.io/awards.html">
 <meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="ar_SY">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://ward00al-khatib.github.io/awards.html">
+<link rel="alternate" hreflang="en" href="https://ward00al-khatib.github.io/awards.html">
+<link rel="alternate" hreflang="ar" href="https://ward00al-khatib.github.io/ar/awards.html">
+<link rel="alternate" hreflang="x-default" href="https://ward00al-khatib.github.io/awards.html">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="img/brand/roze-icon-small.svg">
 <link rel="apple-touch-icon" href="img/brand/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&family=Noto+Kufi+Arabic:wght@600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
 <link rel="stylesheet" href="assets/site.css">
 <script>
-/* pick the language before the page paints: #ar / #en link, then the visitor's last choice, then the browser language */
+/* language before the page paints. Each language has its own pages (English at the root, Arabic under /ar/),
+   so search engines see two sites. An old #ar / #en link, then the visitor's last choice, then an Arabic
+   browser (only from an English page) moves to the matching page; otherwise the page keeps its own language. */
 (function(){
-  var l = "en";
-  try { var s = localStorage.getItem("wa-lang"); if (s === "ar" || s === "en") l = s;
-        else if ((navigator.languages || [navigator.language || ""]).some(function(x){ return /^ar\b/i.test(x); })) l = "ar"; } catch (e) {}
-  if (location.hash === "#ar") l = "ar"; else if (location.hash === "#en") l = "en";
-  var r = document.documentElement; r.setAttribute("data-lang", l); r.lang = l; r.dir = l === "ar" ? "rtl" : "ltr";
+  var r = document.documentElement, here = r.getAttribute("data-url-lang") || "en", want = null;
+  try { var s = localStorage.getItem("wa-lang"); if (s === "ar" || s === "en") want = s; } catch (e) {}
+  if (!want && here === "en" && (navigator.languages || [navigator.language || ""]).some(function(x){ return /^ar\b/i.test(x); })) want = "ar";
+  if (location.hash === "#ar") want = "ar"; else if (location.hash === "#en") want = "en";
+  if (want && want !== here) {
+    var alt = document.querySelector('link[rel="alternate"][hreflang="' + want + '"]');
+    if (alt) {
+      try { localStorage.setItem("wa-lang", want); } catch (e) {}
+      location.replace(new URL(alt.href).pathname + (/^#(ar|en)$/.test(location.hash) ? "" : location.hash));
+      return;
+    }
+  }
+  r.setAttribute("data-lang", here); r.lang = here; r.dir = here === "ar" ? "rtl" : "ltr";
 })();
 </script>
 </head>
@@ -131,8 +144,8 @@
       </p>
     </div>
     <figure class="wro-media">
-      <img class="team" src="img/portrait-medal.jpg" width="960" height="1280" loading="lazy" alt="Ward Alkhatib holding medals and the WRO 2023 'Connecting the World' trophy" data-ar-alt="ورد الخطيب يحمل الميداليات ودرع WRO 2023">
-      <img class="cert" src="img/wro-certificate.jpg" width="1298" height="915" loading="lazy" alt="Silver certificate of participation, WRO 2023 International Final, issued to Ward Alkhatib, team H2A, Syria" data-ar-alt="شهادة المشاركة الفضية في النهائي الدولي WRO 2023 باسم ورد الخطيب، فريق H2A، سوريا">
+      <img class="team" src="img/portrait-medal.jpg" width="960" height="1280" loading="lazy" alt="Ward Alkhatib holding medals and the WRO 2023 'Connecting the World' trophy" data-ar-alt="ورد الخطيب يحمل الميداليات ودرع WRO 2023" srcset="img/sm/portrait-medal-640.webp 640w, img/portrait-medal.jpg 960w" sizes="(max-width: 700px) 72vw, 371px">
+      <img class="cert" src="img/wro-certificate.jpg" width="1298" height="915" loading="lazy" alt="Silver certificate of participation, WRO 2023 International Final, issued to Ward Alkhatib, team H2A, Syria" data-ar-alt="شهادة المشاركة الفضية في النهائي الدولي WRO 2023 باسم ورد الخطيب، فريق H2A، سوريا" srcset="img/sm/wro-certificate-640.webp 640w, img/sm/wro-certificate-1280.webp 1280w" sizes="(max-width: 700px) 62vw, 323px">
       <figcaption><span class="en">Certificate from the WRO 2023 International Final</span><span class="ar">شهادة النهائي الدولي WRO 2023</span></figcaption>
     </figure>
   </div>
@@ -140,7 +153,7 @@
 <section id="gold">
   <div class="wrap gold">
     <figure class="gold-pic">
-      <img src="img/wro-syria-gold.jpg" width="1280" height="853" loading="lazy" alt="Team Astronauts with their gold medals and trophy on stage at WRO Syria 2023, with their coach Ward Alkhatib" data-ar-alt="فريق Astronauts بميدالياته الذهبية وكأسه على مسرح WRO سوريا 2023 مع مدرّبه ورد الخطيب">
+      <img src="img/wro-syria-gold.jpg" width="1280" height="853" loading="lazy" alt="Team Astronauts with their gold medals and trophy on stage at WRO Syria 2023, with their coach Ward Alkhatib" data-ar-alt="فريق Astronauts بميدالياته الذهبية وكأسه على مسرح WRO سوريا 2023 مع مدرّبه ورد الخطيب" srcset="img/sm/wro-syria-gold-640.webp 640w, img/sm/wro-syria-gold-1280.webp 1280w" sizes="(max-width: 700px) 92vw, 559px">
       <figcaption><span class="en">Team Astronauts on stage at WRO Syria 2023</span><span class="ar">فريق Astronauts على مسرح WRO سوريا 2023</span></figcaption>
     </figure>
     <div>
@@ -169,7 +182,7 @@
       <h2><span class="en">Milestones</span><span class="ar">المحطات</span></h2>
     </div>
     <ol class="alist">
-      <li><span class="when ltr">2026</span><div><b><span class="en">Bachelor's in Mechatronics, Robotics and Automation Engineering</span><span class="ar">بكالوريوس هندسة الميكاترونيكس والروبوتيك والأتمتة</span></b><p><span class="en">Homs University. Graduation project: WALL-E Junior, an autonomous waste-sorting robot.</span><span class="ar">جامعة حمص. مشروع التخرج: WALL-E Junior، روبوت ذاتي القيادة لفرز النفايات.</span></p><a href="graduation.html"><span class="en">See the project</span><span class="ar">تفاصيل المشروع</span></a></div></li>
+      <li><span class="when ltr">2026</span><div><b><span class="en">Bachelor's in Mechatronics, Robotics and Automation Engineering</span><span class="ar">بكالوريوس هندسة الميكاترونيك والروبوتيك والأتمتة</span></b><p><span class="en">Homs University. Graduation project: WALL-E Junior, an autonomous waste-sorting robot.</span><span class="ar">جامعة حمص. مشروع التخرج: WALL-E Junior، روبوت ذاتي القيادة لفرز النفايات.</span></p><a href="graduation.html"><span class="en">See the project</span><span class="ar">تفاصيل المشروع</span></a></div></li>
       <li class="hot"><span class="when ltr">2024</span><div><b><span class="en">First, second and third place in Sumo, ARC Syria 2024</span><span class="ar">المراكز الأول والثاني والثالث في السومو، ARC Syria 2024</span></b><p><span class="en">I supervised the National Center for the Distinguished teams in design, programming and algorithm development, and the center's teams took all three podium places.</span><span class="ar">أشرفتُ على فرق المركز الوطني للمتميزين وتابعتُها في التصميم والبرمجة وإعداد الخوارزميات، فنالت فرق المركز المراكز الثلاثة الأولى.</span></p></div></li>
       <li class="hot"><span class="when ltr">2023</span><div><b><span class="en">Silver medal, WRO 2023 International Final</span><span class="ar">الميدالية الفضية، النهائي الدولي WRO 2023</span></b><p><span class="en">Panama City, 7–9 November 2023. RoboMission Senior, Team H2A representing Syria, as the team's trainer and supervisor.</span><span class="ar">مدينة بنما، 7–9 تشرين الثاني 2023. فئة RoboMission Senior، فريق H2A ممثلاً سوريا، بصفتي مدرّب الفريق ومشرفه.</span></p><a href="competitions.html"><span class="en">How the team was prepared</span><span class="ar">كيف حضّرنا الفريق</span></a></div></li>
       <li class="hot gold-li"><span class="when ltr">2023</span><div><b><span class="en">Two gold and two bronze medals, WRO Syria 2023</span><span class="ar">ذهبيتان وبرونزيتان، البطولة الوطنية WRO سوريا 2023</span></b><p><span class="en">Gold in Senior and in Junior, including Team Astronauts in RoboMission (ages 11–15), and two bronzes in Junior.</span><span class="ar">ذهبية في الفئة الكبرى Senior وأخرى في المتوسطة Junior، منها ذهبية فريق Astronauts في مسابقة المهمات (11–15 سنة)، وبرونزيتان في الفئة المتوسطة.</span></p></div></li>
@@ -191,7 +204,7 @@
 <footer>
   <div class="wrap">
     <span><span class="en">© 2026 Ward Alkhatib</span><span class="ar">© 2026 ورد الخطيب</span></span>
-    <span><span class="en">Mechatronics · Robotics · Community</span><span class="ar">ميكاترونيكس · روبوتيك · مجتمع</span></span>
+    <span><span class="en">Mechatronics · Robotics · Community</span><span class="ar">ميكاترونيك · روبوتيك · مجتمع</span></span>
   </div>
 </footer>
 

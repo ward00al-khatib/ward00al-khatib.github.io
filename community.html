@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" dir="ltr" data-lang="en">
+<html lang="en" dir="ltr" data-lang="en" data-url-lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -10,23 +10,36 @@
 <meta property="og:image" content="https://ward00al-khatib.github.io/img/youth-gathering.jpg">
 <meta property="og:url" content="https://ward00al-khatib.github.io/community.html">
 <meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="ar_SY">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://ward00al-khatib.github.io/community.html">
+<link rel="alternate" hreflang="en" href="https://ward00al-khatib.github.io/community.html">
+<link rel="alternate" hreflang="ar" href="https://ward00al-khatib.github.io/ar/community.html">
+<link rel="alternate" hreflang="x-default" href="https://ward00al-khatib.github.io/community.html">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="img/brand/roze-icon-small.svg">
 <link rel="apple-touch-icon" href="img/brand/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&family=Noto+Kufi+Arabic:wght@600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
 <link rel="stylesheet" href="assets/site.css">
 <script>
-/* pick the language before the page paints: #ar / #en link, then the visitor's last choice, then the browser language */
+/* language before the page paints. Each language has its own pages (English at the root, Arabic under /ar/),
+   so search engines see two sites. An old #ar / #en link, then the visitor's last choice, then an Arabic
+   browser (only from an English page) moves to the matching page; otherwise the page keeps its own language. */
 (function(){
-  var l = "en";
-  try { var s = localStorage.getItem("wa-lang"); if (s === "ar" || s === "en") l = s;
-        else if ((navigator.languages || [navigator.language || ""]).some(function(x){ return /^ar\b/i.test(x); })) l = "ar"; } catch (e) {}
-  if (location.hash === "#ar") l = "ar"; else if (location.hash === "#en") l = "en";
-  var r = document.documentElement; r.setAttribute("data-lang", l); r.lang = l; r.dir = l === "ar" ? "rtl" : "ltr";
+  var r = document.documentElement, here = r.getAttribute("data-url-lang") || "en", want = null;
+  try { var s = localStorage.getItem("wa-lang"); if (s === "ar" || s === "en") want = s; } catch (e) {}
+  if (!want && here === "en" && (navigator.languages || [navigator.language || ""]).some(function(x){ return /^ar\b/i.test(x); })) want = "ar";
+  if (location.hash === "#ar") want = "ar"; else if (location.hash === "#en") want = "en";
+  if (want && want !== here) {
+    var alt = document.querySelector('link[rel="alternate"][hreflang="' + want + '"]');
+    if (alt) {
+      try { localStorage.setItem("wa-lang", want); } catch (e) {}
+      location.replace(new URL(alt.href).pathname + (/^#(ar|en)$/.test(location.hash) ? "" : location.hash));
+      return;
+    }
+  }
+  r.setAttribute("data-lang", here); r.lang = here; r.dir = here === "ar" ? "rtl" : "ltr";
 })();
 </script>
 </head>
@@ -130,11 +143,11 @@
   <div class="wrap">
     <div class="sec-head"><p class="label"><span class="en">Photos</span><span class="ar">صور</span></p></div>
     <div class="gallery">
-      <figure class="shot"><button type="button"><img src="img/youth-gathering.jpg" width="1050" height="1400" loading="lazy" alt="Young people gathered outdoors among pine trees" data-ar-alt="شباب مجتمعون في الهواء الطلق بين أشجار الصنوبر"></button>
+      <figure class="shot"><button type="button"><img src="img/youth-gathering.jpg" width="1050" height="1400" loading="lazy" alt="Young people gathered outdoors among pine trees" data-ar-alt="شباب مجتمعون في الهواء الطلق بين أشجار الصنوبر" srcset="img/sm/youth-gathering-640.webp 640w, img/youth-gathering.jpg 1050w" sizes="(max-width: 700px) 92vw, 351px"></button>
         <figcaption><span><span class="en">Youth initiative gathering, 2025</span><span class="ar">لقاء المبادرة الشبابية، 2025</span></span></figcaption></figure>
-      <figure class="shot"><button type="button"><img src="img/youth-night.jpg" width="1400" height="1050" loading="lazy" alt="Initiative volunteers together at night" data-ar-alt="متطوعو المبادرة معاً ليلاً"></button>
+      <figure class="shot"><button type="button"><img src="img/youth-night.jpg" width="1400" height="1050" loading="lazy" alt="Initiative volunteers together at night" data-ar-alt="متطوعو المبادرة معاً ليلاً" srcset="img/sm/youth-night-640.webp 640w, img/sm/youth-night-1280.webp 1280w" sizes="(max-width: 700px) 92vw, 351px"></button>
         <figcaption><span><span class="en">Initiative volunteers, 2025</span><span class="ar">متطوعو المبادرة، 2025</span></span></figcaption></figure>
-      <figure class="shot"><button type="button"><img src="img/community-event.jpg" width="1400" height="1050" loading="lazy" alt="A community event in a town courtyard" data-ar-alt="فعالية مجتمعية في ساحة البلدة"></button>
+      <figure class="shot"><button type="button"><img src="img/community-event.jpg" width="1400" height="1050" loading="lazy" alt="A community event in a town courtyard" data-ar-alt="فعالية مجتمعية في ساحة البلدة" srcset="img/sm/community-event-640.webp 640w, img/sm/community-event-1280.webp 1280w" sizes="(max-width: 700px) 92vw, 351px"></button>
         <figcaption><span><span class="en">Community event, 2025</span><span class="ar">فعالية مجتمعية، 2025</span></span></figcaption></figure>
     </div>
   </div>
@@ -148,7 +161,7 @@
 <footer>
   <div class="wrap">
     <span><span class="en">© 2026 Ward Alkhatib</span><span class="ar">© 2026 ورد الخطيب</span></span>
-    <span><span class="en">Mechatronics · Robotics · Community</span><span class="ar">ميكاترونيكس · روبوتيك · مجتمع</span></span>
+    <span><span class="en">Mechatronics · Robotics · Community</span><span class="ar">ميكاترونيك · روبوتيك · مجتمع</span></span>
   </div>
 </footer>
 <dialog class="lb" id="lb" aria-label="Photo viewer">

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" dir="ltr" data-lang="en">
+<html lang="en" dir="ltr" data-lang="en" data-url-lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -10,23 +10,36 @@
 <meta property="og:image" content="https://ward00al-khatib.github.io/img/walle-front.jpg">
 <meta property="og:url" content="https://ward00al-khatib.github.io/side-projects.html">
 <meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="ar_SY">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://ward00al-khatib.github.io/side-projects.html">
+<link rel="alternate" hreflang="en" href="https://ward00al-khatib.github.io/side-projects.html">
+<link rel="alternate" hreflang="ar" href="https://ward00al-khatib.github.io/ar/side-projects.html">
+<link rel="alternate" hreflang="x-default" href="https://ward00al-khatib.github.io/side-projects.html">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="img/brand/roze-icon-small.svg">
 <link rel="apple-touch-icon" href="img/brand/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&family=Noto+Kufi+Arabic:wght@600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
 <link rel="stylesheet" href="assets/site.css">
 <script>
-/* pick the language before the page paints: #ar / #en link, then the visitor's last choice, then the browser language */
+/* language before the page paints. Each language has its own pages (English at the root, Arabic under /ar/),
+   so search engines see two sites. An old #ar / #en link, then the visitor's last choice, then an Arabic
+   browser (only from an English page) moves to the matching page; otherwise the page keeps its own language. */
 (function(){
-  var l = "en";
-  try { var s = localStorage.getItem("wa-lang"); if (s === "ar" || s === "en") l = s;
-        else if ((navigator.languages || [navigator.language || ""]).some(function(x){ return /^ar\b/i.test(x); })) l = "ar"; } catch (e) {}
-  if (location.hash === "#ar") l = "ar"; else if (location.hash === "#en") l = "en";
-  var r = document.documentElement; r.setAttribute("data-lang", l); r.lang = l; r.dir = l === "ar" ? "rtl" : "ltr";
+  var r = document.documentElement, here = r.getAttribute("data-url-lang") || "en", want = null;
+  try { var s = localStorage.getItem("wa-lang"); if (s === "ar" || s === "en") want = s; } catch (e) {}
+  if (!want && here === "en" && (navigator.languages || [navigator.language || ""]).some(function(x){ return /^ar\b/i.test(x); })) want = "ar";
+  if (location.hash === "#ar") want = "ar"; else if (location.hash === "#en") want = "en";
+  if (want && want !== here) {
+    var alt = document.querySelector('link[rel="alternate"][hreflang="' + want + '"]');
+    if (alt) {
+      try { localStorage.setItem("wa-lang", want); } catch (e) {}
+      location.replace(new URL(alt.href).pathname + (/^#(ar|en)$/.test(location.hash) ? "" : location.hash));
+      return;
+    }
+  }
+  r.setAttribute("data-lang", here); r.lang = here; r.dir = here === "ar" ? "rtl" : "ltr";
 })();
 </script>
 </head>
@@ -84,10 +97,14 @@
       </div>
       <p class="rose-text"><span class="en">ROZE runs the daily work of a shop: selling at the counter, keeping stock, tracking who owes what, and closing the cash at the end of the day. It is fully in Arabic, works without internet and keeps its data on the device. I build it and sell it to shop owners. One codebase produces a separate build for each shop, with its own name, icon, currency and type of business, and the laptop version has been through a trial day in a working shop.</span><span class="ar">يدير ROZE العمل اليومي للمحل: البيع على الصندوق، ومتابعة المخزون، وحساب الديون، وإغلاق الصندوق آخر اليوم. واجهته عربية بالكامل، ويعمل دون إنترنت، وتبقى بياناته على الجهاز. أبنيه وأبيعه لأصحاب المحلات. ومن قاعدة كود واحدة تخرج نسخة لكل محل باسمه وأيقونته وعملته ونوع نشاطه، وقد خاضت نسخة اللابتوب يوم تجربة في محل فعلي.</span></p>
       <div class="specs">
-        <div><b class="ltr">21</b><span><span class="en">Screens, each built for phone and for laptop</span><span class="ar">شاشة، لكلٍّ منها نسخة للموبايل وأخرى للابتوب</span></span></div>
+        <div><b class="ltr">28</b><span><span class="en">Screens, each built for phone and for laptop</span><span class="ar">شاشة، لكلٍّ منها نسخة للموبايل وأخرى للابتوب</span></span></div>
         <div><b class="ltr">10</b><span><span class="en">Shop types with their own presets, from grocery to pharmacy</span><span class="ar">أنواع محلات لكلٍّ منها إعداداته، من البقالة إلى الصيدلية</span></span></div>
         <div><b class="ltr">10</b><span><span class="en">Currencies supported, with two-currency debts</span><span class="ar">عملات مدعومة، مع ديون بعملتين</span></span></div>
         <div><b class="ltr">300+</b><span><span class="en">Automated checks on the accounting core</span><span class="ar">فحص آلي على نواة المحاسبة</span></span></div>
+      </div>
+      <div class="rose-cta">
+        <a class="btn primary" href="https://roze-cv8.pages.dev/" target="_blank" rel="noopener"><span class="en">Try ROZE in your browser</span><span class="ar">جرّب ROZE في المتصفح</span></a>
+        <a class="btn ghost" href="https://roze-cv8.pages.dev/assets/roze-guide.pdf" target="_blank" rel="noopener"><span class="en">Read the booklet (PDF)</span><span class="ar">اقرأ كتيّب البرنامج (PDF)</span></a>
       </div>
     </div>
   </div>
@@ -101,18 +118,18 @@
       <p class="sec-intro"><span class="en">From the laptop version, filled with sample data for a demo grocery. The app's interface is in Arabic.</span><span class="ar">من نسخة اللابتوب، ببيانات تجريبية لبقالة افتراضية. واجهة البرنامج باللغة العربية.</span></p>
     </div>
     <div class="gallery screens">
-      <figure class="shot"><button type="button"><img src="img/rose-pos.jpg" width="1422" height="804" loading="lazy" alt="ROZE screenshot. Point of sale: tap items, see the cart and the total, pay in cash or on credit" data-ar-alt="صورة من ROZE. نقطة البيع: المس المواد، وشاهد السلة والإجمالي، وادفع نقداً أو بالدين"></button>
-        <figcaption><span><span class="en">Point of sale: tap items, see the cart and the total, pay in cash or on credit</span><span class="ar">نقطة البيع: المس المواد، وشاهد السلة والإجمالي، وادفع نقداً أو بالدين</span></span></figcaption></figure>
-      <figure class="shot"><button type="button"><img src="img/rose-dashboard.jpg" width="1422" height="804" loading="lazy" alt="ROZE screenshot. Dashboard: today's sales, the cash drawer, profit and the last seven days" data-ar-alt="صورة من ROZE. لوحة التحكم: مبيعات اليوم، والصندوق، والربح، وآخر سبعة أيام"></button>
-        <figcaption><span><span class="en">Dashboard: today's sales, the cash drawer, profit and the last seven days</span><span class="ar">لوحة التحكم: مبيعات اليوم، والصندوق، والربح، وآخر سبعة أيام</span></span></figcaption></figure>
-      <figure class="shot"><button type="button"><img src="img/rose-statement.jpg" width="1422" height="500" loading="lazy" alt="ROZE screenshot. Customer statement with every invoice and payment, ready to print" data-ar-alt="صورة من ROZE. كشف حساب الزبون بكل فاتورة ودفعة، جاهز للطباعة"></button>
-        <figcaption><span><span class="en">Customer statement with every invoice and payment, ready to print</span><span class="ar">كشف حساب الزبون بكل فاتورة ودفعة، جاهز للطباعة</span></span></figcaption></figure>
-      <figure class="shot"><button type="button"><img src="img/rose-debts.jpg" width="1422" height="590" loading="lazy" alt="ROZE screenshot. Collecting a debt: the payment is previewed and settles the oldest invoice first" data-ar-alt="صورة من ROZE. تحصيل دين: تُعايَن الدفعة قبل تسجيلها وتسدّد أقدم فاتورة أولاً"></button>
-        <figcaption><span><span class="en">Collecting a debt: the payment is previewed and settles the oldest invoice first</span><span class="ar">تحصيل دين: تُعايَن الدفعة قبل تسجيلها وتسدّد أقدم فاتورة أولاً</span></span></figcaption></figure>
-      <figure class="shot"><button type="button"><img src="img/rose-reconcile.jpg" width="1422" height="610" loading="lazy" alt="ROZE screenshot. Reconciliation: six checks, each number traced back to its source" data-ar-alt="صورة من ROZE. المطابقة: ستة فحوص، وكل رقم يُتتبَّع إلى مصدره"></button>
-        <figcaption><span><span class="en">Reconciliation: six checks, each number traced back to its source</span><span class="ar">المطابقة: ستة فحوص، وكل رقم يُتتبَّع إلى مصدره</span></span></figcaption></figure>
-      <figure class="shot"><button type="button"><img src="img/rose-setup.jpg" width="1422" height="720" loading="lazy" alt="ROZE screenshot. Store setup: the type of business sets the categories and units" data-ar-alt="صورة من ROZE. تهيئة المتجر: نوع النشاط يحدّد التصنيفات والوحدات"></button>
-        <figcaption><span><span class="en">Store setup: the type of business sets the categories and units</span><span class="ar">تهيئة المتجر: نوع النشاط يحدّد التصنيفات والوحدات</span></span></figcaption></figure>
+      <figure class="shot"><button type="button"><img src="img/roze-pos.jpg" srcset="img/sm/roze-pos-640.webp 640w, img/sm/roze-pos-1280.webp 1280w" sizes="(max-width: 700px) 92vw, 533px" width="1280" height="720" loading="lazy" alt="ROZE screenshot. Point of sale: scan or tap items, see the cart and the total, pay in cash or on credit" data-ar-alt="صورة من ROZE. نقطة البيع: امسح المواد أو المسها، وشاهد السلة والإجمالي، وادفع نقداً أو ديناً"></button>
+        <figcaption><span><span class="en">Point of sale: scan or tap items, see the cart and the total, pay in cash or on credit</span><span class="ar">نقطة البيع: امسح المواد أو المسها، وشاهد السلة والإجمالي، وادفع نقداً أو ديناً</span></span></figcaption></figure>
+      <figure class="shot"><button type="button"><img src="img/roze-dashboard.jpg" srcset="img/sm/roze-dashboard-640.webp 640w, img/sm/roze-dashboard-1280.webp 1280w" sizes="(max-width: 700px) 92vw, 533px" width="1280" height="720" loading="lazy" alt="ROZE screenshot. Dashboard: today's sales, profit, the cash drawer and the last seven days" data-ar-alt="صورة من ROZE. لوحة التحكم: مبيعات اليوم، والربح، والصندوق، وآخر سبعة أيام"></button>
+        <figcaption><span><span class="en">Dashboard: today's sales, profit, the cash drawer and the last seven days</span><span class="ar">لوحة التحكم: مبيعات اليوم، والربح، والصندوق، وآخر سبعة أيام</span></span></figcaption></figure>
+      <figure class="shot"><button type="button"><img src="img/roze-statement.jpg" srcset="img/sm/roze-statement-640.webp 640w, img/sm/roze-statement-1280.webp 1280w" sizes="(max-width: 700px) 92vw, 533px" width="1280" height="720" loading="lazy" alt="ROZE screenshot. Customer account: what they owe, what they paid, and a statement ready to print or send" data-ar-alt="صورة من ROZE. حساب الزبون: ما عليه، وما سدّده، وكشف حساب جاهز للطباعة أو الإرسال"></button>
+        <figcaption><span><span class="en">Customer account: what they owe, what they paid, and a statement ready to print or send</span><span class="ar">حساب الزبون: ما عليه، وما سدّده، وكشف حساب جاهز للطباعة أو الإرسال</span></span></figcaption></figure>
+      <figure class="shot"><button type="button"><img src="img/roze-close-day.jpg" srcset="img/sm/roze-close-day-640.webp 640w, img/sm/roze-close-day-1280.webp 1280w" sizes="(max-width: 700px) 92vw, 533px" width="1280" height="720" loading="lazy" alt="ROZE screenshot. Closing the day: count the drawer, the surplus goes to its own box, the rest to the safe" data-ar-alt="صورة من ROZE. إقفال اليوم: عدّ الدرج، فتذهب الزيادة إلى صندوقها، والباقي إلى الخزنة"></button>
+        <figcaption><span><span class="en">Closing the day: count the drawer, the surplus goes to its own box, the rest to the safe</span><span class="ar">إقفال اليوم: عدّ الدرج، فتذهب الزيادة إلى صندوقها، والباقي إلى الخزنة</span></span></figcaption></figure>
+      <figure class="shot"><button type="button"><img src="img/roze-reconcile.jpg" srcset="img/sm/roze-reconcile-640.webp 640w, img/sm/roze-reconcile-1280.webp 1280w" sizes="(max-width: 700px) 92vw, 533px" width="1422" height="886" loading="lazy" alt="ROZE screenshot. Reconciliation: up to 15 checks, each number traced back to its source" data-ar-alt="صورة من ROZE. المطابقة: حتى 15 فحصاً، وكل رقم يُتتبَّع إلى مصدره"></button>
+        <figcaption><span><span class="en">Reconciliation: up to 15 checks, each number traced back to its source</span><span class="ar">المطابقة: حتى 15 فحصاً، وكل رقم يُتتبَّع إلى مصدره</span></span></figcaption></figure>
+      <figure class="shot"><button type="button"><img src="img/roze-composite.jpg" srcset="img/sm/roze-composite-640.webp 640w, img/sm/roze-composite-1280.webp 1280w" sizes="(max-width: 700px) 92vw, 533px" width="1422" height="972" loading="lazy" alt="ROZE screenshot. Composite items: a cup of coffee takes its coffee, sugar, cup and spoon out of stock, with its cost and profit" data-ar-alt="صورة من ROZE. المواد التجميعية: كاسة القهوة تُخرج معها القهوة والسكر والكاسة والملعقة، بتكلفتها وربحها"></button>
+        <figcaption><span><span class="en">Composite items: a cup of coffee takes its coffee, sugar, cup and spoon out of stock, with its cost and profit</span><span class="ar">المواد التجميعية: كاسة القهوة تُخرج معها القهوة والسكر والكاسة والملعقة، بتكلفتها وربحها</span></span></figcaption></figure>
     </div>
   </div>
 </section>
@@ -183,7 +200,7 @@
 <footer>
   <div class="wrap">
     <span><span class="en">© 2026 Ward Alkhatib</span><span class="ar">© 2026 ورد الخطيب</span></span>
-    <span><span class="en">Mechatronics · Robotics · Community</span><span class="ar">ميكاترونيكس · روبوتيك · مجتمع</span></span>
+    <span><span class="en">Mechatronics · Robotics · Community</span><span class="ar">ميكاترونيك · روبوتيك · مجتمع</span></span>
   </div>
 </footer>
 
