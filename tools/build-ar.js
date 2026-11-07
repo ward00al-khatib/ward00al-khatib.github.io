@@ -18,6 +18,7 @@ const PAGES = {
   "index.html": {
     title: "ورد الخطيب · مهندس ميكاترونيك وروبوتيك",
     desc: "ورد الخطيب، مهندس ميكاترونيك ومدرّب روبوتيك من سوريا. مشروع تخرجه WALL-E Junior روبوت ذاتي القيادة يفرز النفايات، ودرّب فريق H2A حتى فضية النهائي الدولي لأولمبياد الروبوت العالمي WRO 2023.",
+    ogAlt: "ورد الخطيب، مهندس ميكاترونيك وروبوتيك، بجانب روبوت مشروع تخرجه WALL-E Junior",
     priority: "1.0",
   },
   "community.html": { title: "العمل المجتمعي · ورد الخطيب", priority: "0.7" },
@@ -69,6 +70,13 @@ for (const [pg, meta] of Object.entries(PAGES)) {
   s = s.replace(/<meta property="og:locale" content="en_US">/, `<meta property="og:locale" content="ar_SY">`);
   s = s.replace(/<meta property="og:locale:alternate" content="ar_SY">/, `<meta property="og:locale:alternate" content="en_US">`);
   s = s.replace(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="${urlOf(pg, true)}">`);
+
+  // a share card made in two languages (tools/share): img/share/NAME-en.jpg becomes NAME-ar.jpg
+  s = s.replace(/(<meta property="og:image" content="[^"]*\/img\/share\/([^"/]+))-en\.jpg">/, (m, a, name) => {
+    if (!fs.existsSync(path.join(ROOT, "img", "share", `${name}-ar.jpg`))) throw new Error(`${pg}: img/share/${name}-ar.jpg is missing: run python tools/share/build-share.py`);
+    return `${a}-ar.jpg">`;
+  });
+  if (meta.ogAlt) s = s.replace(/<meta property="og:image:alt" content="[^"]*">/, `<meta property="og:image:alt" content="${esc(meta.ogAlt)}">`);
 
   // relative paths, including every candidate in srcset
   s = s.replace(/\s(src|href|poster)="([^"]*)"/g, (m, a, v) => ` ${a}="${deeper(v)}"`);

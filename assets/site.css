@@ -242,6 +242,10 @@ html[data-lang="ar"] .build .tag{letter-spacing:0;font-size:12px;font-family:var
 /* profile */
 .profile-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.4fr);gap:clamp(28px,5vw,72px);align-items:start}
 .profile-text{font-size:18px;line-height:1.7;max-width:60ch}
+/* what Ward is looking for, under the profile: a quiet note, not a banner */
+.seeking{margin:18px 0 0;max-width:60ch;padding:12px 16px;border-inline-start:3px solid var(--signal);background:var(--sheet);font-size:16px;line-height:1.6;color:var(--ink-2)}
+.seeking b{display:block;margin-bottom:2px;font:500 12.5px/1.4 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--signal-ink)}
+html[data-lang="ar"] .seeking b{font-size:14px;letter-spacing:0}
 .pillars{display:grid;gap:26px}
 .pillar{display:grid;grid-template-columns:44px minmax(0,1fr);gap:16px;border-top:2px solid var(--ink);padding-top:16px}
 .pillar svg{width:40px;height:40px;stroke:var(--ink);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}

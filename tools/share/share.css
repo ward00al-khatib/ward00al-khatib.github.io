@@ -1,0 +1,46 @@
+/* Share cards (Open Graph 1200×630) and the LinkedIn banner (1584×396), drawn in the site's colours and fonts
+   and photographed by build-share.js. One file per image: share-en.html, share-ar.html, banner.html. */
+* { box-sizing: border-box; margin: 0; }
+html, body { width: 100%; height: 100%; overflow: hidden; }
+body {
+  background:
+    radial-gradient(circle, #171d2c 1.1px, transparent 1.3px) 0 0 / 22px 22px,
+    #000;
+  color: #EEF2F8;
+  font: 400 24px/1.4 "Inter", "IBM Plex Sans Arabic", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+html[lang="ar"] body { font-family: "IBM Plex Sans Arabic", "Inter", sans-serif; }
+
+.card { position: relative; width: 100%; height: 100%; display: flex; align-items: center; }
+.robot { position: absolute; bottom: 0; inset-inline-end: 0; height: 92%; width: auto;
+  /* the photo's black background melts into the black canvas */
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 9%); mask-image: linear-gradient(to right, transparent, #000 9%); }
+.banner .robot { height: 100%; }
+
+.text { position: relative; z-index: 1; padding-inline: 72px 0; }
+.eyebrow { font: 500 17px/1 "JetBrains Mono", "IBM Plex Sans Arabic", monospace; letter-spacing: .14em; color: #FFAE5C; display: flex; align-items: center; gap: 12px; }
+html[lang="ar"] .eyebrow { font-family: "IBM Plex Sans Arabic", sans-serif; font-weight: 600; letter-spacing: 0; font-size: 21px; }
+.eyebrow::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: #FF8A1F; box-shadow: 0 0 14px #FF8A1F; }
+h1 { font: 500 80px/1 "Space Grotesk", "Noto Kufi Arabic", sans-serif; letter-spacing: -.02em; margin-top: 26px; }
+html[lang="ar"] h1 { font: 600 76px/1.35 "Noto Kufi Arabic", "Space Grotesk", sans-serif; letter-spacing: 0; margin-top: 18px; }
+.role { font: 500 30px/1.25 "Space Grotesk", "Noto Kufi Arabic", sans-serif; color: #AEB8CA; margin-top: 14px; }
+html[lang="ar"] .role { font: 600 28px/1.5 "Noto Kufi Arabic", sans-serif; margin-top: 4px; }
+.rule { width: 120px; height: 3px; background: #FF8A1F; margin: 30px 0 26px; }
+ul { list-style: none; padding: 0; display: grid; gap: 12px; }
+li { font-size: 22px; line-height: 1.35; color: #EEF2F8; display: flex; gap: 14px; align-items: baseline; }
+html[lang="ar"] li { font-size: 23px; }
+li b { color: #3DDCFF; font-weight: 400; font-family: "JetBrains Mono", monospace; font-size: 17px; }
+.url { position: absolute; z-index: 1; bottom: 34px; left: 72px; font: 500 18px/1 "JetBrains Mono", monospace; color: #8290A8; letter-spacing: .04em; direction: ltr; }
+html[lang="ar"] .url { left: auto; right: 72px; }
+.ltr { direction: ltr; unicode-bidi: isolate; }
+
+/* LinkedIn banner: the profile photo covers the lower left on desktop and phones crop the sides,
+   so the words sit right of centre and the robot at the right edge */
+.banner .text { padding-inline: 0; margin-inline-start: 520px; }
+.banner .eyebrow { font-size: 16px; }
+.banner .tag { font: 500 41px/1.15 "Space Grotesk", sans-serif; letter-spacing: -.01em; margin-top: 18px; }
+.banner .tag em { font-style: normal; color: #FFAE5C; }
+.banner ul { margin-top: 22px; gap: 8px; }
+.banner li { font-size: 19px; color: #AEB8CA; }
+.banner li b { font-size: 15px; }
