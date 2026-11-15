@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /booklet/
 
 Sitemap: https://ward00al-khatib.github.io/sitemap.xml
