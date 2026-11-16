@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.bothaina.roze",
+    "sha256_cert_fingerprints": ["6E:3B:4F:65:84:71:3A:4A:AE:DC:85:2E:A8:03:6D:F0:94:F2:29:02:6D:E4:42:74:E6:3A:8C:B6:B0:2E:3E:E1"]
+  }
+}]
