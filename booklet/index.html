@@ -74,7 +74,17 @@ td.code,td[dir=ltr]{white-space:nowrap}
 .code{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;direction:ltr;unicode-bidi:isolate;color:var(--gold);font-weight:600}
 .empty{color:var(--muted);font-size:14px;padding:14px 0}
 .note{font-size:13px;color:var(--muted)}
-.result{display:flex;gap:10px;flex-wrap:wrap}
+.result{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.result textarea{width:100%;font:inherit;font-size:14px;line-height:1.75;padding:10px 12px;border-radius:6px;border:1px solid var(--rule);background:var(--panel);color:var(--ink);resize:vertical}
+.acts{display:flex;gap:10px;flex-wrap:wrap}
+.opt{font-weight:400;color:var(--muted);font-size:12.5px}
+.hint{font-size:12.5px;color:var(--muted);margin:0}
+select{width:100%;font:inherit;padding:9px 11px;border-radius:6px;border:1px solid var(--rule);background:var(--bg);color:var(--ink)}
+input[type=url]{width:100%;font:inherit;padding:9px 11px;border-radius:6px;border:1px solid var(--rule);background:var(--bg);color:var(--ink)}
+.settings{margin-top:36px;border:1px solid var(--rule);border-radius:6px;padding:10px 14px}
+.settings summary{cursor:pointer;font-weight:600}
+.settings label{margin-top:12px}
+.settings[open]{padding-bottom:14px}
 a.btn{text-decoration:none;display:inline-block}
 .btn.alt{background:transparent;color:var(--brand);border:1px solid var(--rule)}
 .btn.small{font-size:13px;padding:7px 12px;font-weight:500}
@@ -106,6 +116,12 @@ a.btn{text-decoration:none;display:inline-block}
         <div><label for="name">اسم الزبون</label><input type="text" id="name" placeholder="سارة أحمد" autocomplete="off"></div>
         <div><label for="phone">رقم الهاتف</label><input type="tel" id="phone" placeholder="0944 123 456" dir="ltr" style="text-align:right" autocomplete="off"></div>
       </div>
+      <div class="field pair">
+        <div><label for="gender">المخاطبة في الرسالة</label>
+          <select id="gender"><option value="f">متدرّبة</option><option value="m">متدرّب</option></select></div>
+        <div><label for="tg">رابط دعوة قناة تيليغرام <span class="opt">(اختياري)</span></label>
+          <input type="url" id="tg" placeholder="https://t.me/+…" dir="ltr" autocomplete="off"></div>
+      </div>
       <div class="field checks">
         <label><input type="checkbox" id="optDiag" checked> طباعة الاسم أسفل الشعار المائي في كل صفحة</label>
         <label><input type="checkbox" id="optCover" checked> عدم وضع أي علامة على الغلاف</label>
@@ -115,8 +131,14 @@ a.btn{text-decoration:none;display:inline-block}
         <div class="bar" aria-hidden="true"><i id="prog"></i></div>
         <div class="status" id="status" role="status"></div>
         <div class="result" id="result" hidden>
-          <a class="btn" id="dl" download>تنزيل الملف</a>
-          <button class="btn alt" id="share" type="button" hidden>إرسال عبر واتساب أو تيليغرام</button>
+          <label for="msg">رسالة التعليمات للزبون <span class="opt">(يمكنك تعديلها قبل الإرسال)</span></label>
+          <textarea id="msg" rows="14"></textarea>
+          <div class="acts">
+            <button class="btn" id="share" type="button" hidden>إرسال الملف مع الرسالة</button>
+            <button class="btn alt" id="copy" type="button">نسخ الرسالة</button>
+            <a class="btn alt" id="dl" download>تنزيل الملف فقط</a>
+          </div>
+          <p class="hint" id="shareHint">واتساب يرسل الملف أحياناً دون النص المرافق، لذلك تُنسخ الرسالة تلقائياً عند الإرسال؛ إن لم تظهر، الصقيها في المحادثة.</p>
         </div>
       </div>
     </section>
@@ -127,6 +149,15 @@ a.btn{text-decoration:none;display:inline-block}
       <p>الاسم المكتوب في الخانة يظهر هنا كما سيُطبع.</p>
     </aside>
   </div>
+
+  <details class="settings">
+    <summary>إعدادات الرسالة</summary>
+    <label for="yt">رابط قائمة حلقات الدورة على يوتيوب</label>
+    <input type="url" id="yt" placeholder="https://youtube.com/playlist?list=…" dir="ltr" autocomplete="off">
+    <label for="contact">وسيلة التواصل مع أ. بثينة</label>
+    <input type="text" id="contact" dir="ltr" autocomplete="off">
+    <p class="hint">تُحفظ هذه الإعدادات على هذا الجهاز، وتُضاف إلى كل رسالة.</p>
+  </details>
 
   <section class="register" aria-labelledby="lh">
     <div class="reghead">
@@ -304,16 +335,67 @@ $('go').addEventListener('click',async()=>{
     if(S.url) URL.revokeObjectURL(S.url);
     S.url=URL.createObjectURL(blob); S.file=new File([blob],fname,{type:'application/pdf'});
     $('dl').href=S.url; $('dl').download=fname; $('result').hidden=false;
+    S.last={name,code}; S.msgEdited=false; refreshMsg();
     $('share').hidden=!(navigator.canShare&&navigator.canShare({files:[S.file]}));
     status('جاهزة: نسخة '+name+' برمز '+code+'.','ok');
   }catch(e){console.error(e);status('تعذّر قراءة ملف الكتيب. تأكدي أنه PDF سليم وغير محمي بكلمة سر.','err')}
   finally{S.busy=false;setTimeout(()=>{$('prog').style.width='0'},1500);drawMock();$('go').disabled=false}
 });
 
+
+/* ---------- instructions message ---------- */
+const DEF_CONTACT='linkedin.com/in/bouthainah-choukair';
+function getSet(k,d){try{return localStorage.getItem(k)||d}catch(e){return d}}
+function setSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+$('yt').value=getSet('yt',''); $('contact').value=getSet('contact',DEF_CONTACT);
+$('yt').addEventListener('change',()=>{setSet('yt',$('yt').value.trim());refreshMsg()});
+$('contact').addEventListener('change',()=>{setSet('contact',$('contact').value.trim());refreshMsg()});
+function buildMsg(name,code,g,tg){
+  const F=g==='f', yt=$('yt').value.trim(), contact=$('contact').value.trim()||DEF_CONTACT;
+  const v=(f,m)=>F?f:m;
+  const L=[];
+  L.push('أهلاً وسهلاً '+name+'،');
+  L.push('');
+  L.push('يسعدنا انضمامك إلى دورة «الوعي بالمشاعر». مرفق مع هذه الرسالة '+v('دليل المتدرّبة','دليل المتدرّب')+' الخاص بك، وهذه طريقة متابعة الدورة خطوة بخطوة:');
+  L.push('');
+  L.push('١. التحضير: '+v('اطبعي','اطبع')+' الدليل، أو '+v('خصّصي','خصّص')+' دفتراً خاصاً للدورة '+v('تكتبين','تكتب')+' فيه يومياً. '+v('ابدئي','ابدأ')+' بقراءة «مقدمة الدورة» في الدليل. مدة الدورة 26 يوماً.');
+  L.push('');
+  L.push('٢. التنفّس اليومي: طوال أيام الدورة، '+v('مارسي','مارس')+' تمرين الهدوء ومراقبة التنفّس صباحاً ومساءً. '+v('ابدئي','ابدأ')+' بخمس دقائق في كل مرة، ثم '+v('زيدي','زِد')+' المدة تدريجياً.');
+  L.push('');
+  L.push('٣. المحور الأول: '+v('استمعي','استمع')+' إلى الحلقة الأولى على قناة اليوتيوب'+(yt?' ('+yt+')':'')+'، ثم '+v('تابعي','تابع')+' شرح المحور في الدليل، و'+v('انتقلي','انتقل')+' إلى أوراق العمل، '+v('واكتبي','واكتب')+' كل يوم المطلوب في ورقة عمله.');
+  L.push('مهم: لا '+v('تنتقلي','تنتقل')+' من يوم إلى يوم، ولا من محور إلى محور، إلا بعد إنجاز المطلوب كاملاً وبالتدريج.');
+  L.push('');
+  L.push('٤. ختام المحور: بعد إنهاء أوراق العمل، '+v('استمعي','استمع')+' إلى التسجيل الختامي للمحور بمسح رمز QR الموجود في الدليل، '+v('وأجيبي','وأجب')+' عن أسئلة المراجعة.');
+  L.push('');
+  L.push('٥. المحاور التالية: '+v('انتقلي','انتقل')+' إلى المحور الثاني ثم الثالث ثم الرابع بالترتيب نفسه، مع الحلقة المقابلة لكل محور على اليوتيوب.');
+  L.push('');
+  L.push('٦. أسئلتك وملاحظاتك: '+v('دوّني','دوّن')+' أي سؤال أو ملاحظة أو استفسار في دفتر الدورة، لنتحاور حولها جميعاً في جلسة خاصة بك وحدك.');
+  if(tg){L.push('');L.push('التسجيلات الصوتية موجودة في قناة الدورة على تيليغرام. '+v('انضمي','انضم')+' إليها من هذا الرابط الخاص بك: '+tg);}
+  L.push('');
+  L.push('هذه النسخة مرخّصة باسمك (رمزها '+code+') للاستخدام الشخصي فقط، فنرجو عدم مشاركتها أو نشرها.');
+  L.push('');
+  L.push('للتواصل مع أ. بثينة صلاح شقير:');
+  L.push(contact);
+  L.push('');
+  L.push('مع أطيب الأمنيات برحلة واعية وهادئة.');
+  return L.join('\n');
+}
+function refreshMsg(){ if(S.last&&!S.msgEdited) $('msg').value=buildMsg(S.last.name,S.last.code,$('gender').value,$('tg').value.trim()); }
+$('msg').addEventListener('input',()=>{S.msgEdited=true});
+['gender','tg'].forEach(id=>$(id).addEventListener('input',()=>{S.msgEdited=false;refreshMsg()}));
+async function copyMsg(){
+  const t=$('msg').value;
+  try{await navigator.clipboard.writeText(t);return true}catch(e){$('msg').focus();$('msg').select();try{return document.execCommand('copy')}catch(_){return false}}
+}
+$('copy').addEventListener('click',async()=>{status(await copyMsg()?'نُسخت الرسالة.':'حدّدي النص وانسخيه يدوياً.',  'ok')});
 $('share').addEventListener('click',async()=>{
-  try{await navigator.share({files:[S.file],title:S.file.name})}catch(e){if(e&&e.name!=='AbortError')status('تعذّر فتح المشاركة. استخدمي زر التنزيل.','err')}
+  const text=$('msg').value; await copyMsg();
+  try{await navigator.share({files:[S.file],text,title:S.file.name})}
+  catch(e){ if(e&&e.name==='AbortError') return;
+    try{await navigator.share({files:[S.file],title:S.file.name});status('أُرسل الملف. الرسالة منسوخة، الصقيها في المحادثة.','ok')}
+    catch(e2){if(e2&&e2.name!=='AbortError')status('تعذّر فتح المشاركة. نزّلي الملف وأرسليه، والرسالة منسوخة.','err')}}
 });
-['name','phone'].forEach(id=>$(id).addEventListener('input',()=>{$('result').hidden=true}));
+['name','phone'].forEach(id=>$(id).addEventListener('input',()=>{$('result').hidden=true;S.last=null}));
 $('exp').addEventListener('click',()=>{
   const b=new Blob([JSON.stringify({app:'booklet-copies',version:1,records:S.records},null,1)],{type:'application/json'});
   const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='سجل النسخ '+new Date().toISOString().slice(0,10)+'.json';document.body.append(a);a.click();a.remove();
