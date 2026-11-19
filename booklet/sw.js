@@ -1,5 +1,5 @@
 // Offline cache for the licensed-copies tool. Bump VERSION when files change.
-const VERSION = 'roze-v2';
+const VERSION = 'roze-v3';
 const FILES = ['./', './index.html', './manifest.webmanifest',
   './assets/pdf-lib.min.js', './assets/logo.svg', './assets/pwa-192.png', './assets/pwa-512.png',
   './assets/IBMPlexSansArabic-Regular.ttf', './assets/IBMPlexSansArabic-Medium.ttf', './assets/IBMPlexSansArabic-SemiBold.ttf',

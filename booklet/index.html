@@ -116,11 +116,9 @@ a.btn{text-decoration:none;display:inline-block}
         <div><label for="name">اسم الزبون</label><input type="text" id="name" placeholder="سارة أحمد" autocomplete="off"></div>
         <div><label for="phone">رقم الهاتف</label><input type="tel" id="phone" placeholder="0944 123 456" dir="ltr" style="text-align:right" autocomplete="off"></div>
       </div>
-      <div class="field pair">
-        <div><label for="gender">المخاطبة في الرسالة</label>
-          <select id="gender"><option value="f">متدرّبة</option><option value="m">متدرّب</option></select></div>
-        <div><label for="tg">رابط دعوة قناة تيليغرام <span class="opt">(اختياري)</span></label>
-          <input type="url" id="tg" placeholder="https://t.me/+…" dir="ltr" autocomplete="off"></div>
+      <div class="field">
+        <label for="gender">المخاطبة في رسالة التعليمات</label>
+        <select id="gender"><option value="f">متدرّبة</option><option value="m">متدرّب</option></select>
       </div>
       <div class="field checks">
         <label><input type="checkbox" id="optDiag" checked> طباعة الاسم أسفل الشعار المائي في كل صفحة</label>
@@ -154,7 +152,9 @@ a.btn{text-decoration:none;display:inline-block}
     <summary>إعدادات الرسالة</summary>
     <label for="yt">رابط قائمة حلقات الدورة على يوتيوب</label>
     <input type="url" id="yt" placeholder="https://youtube.com/playlist?list=…" dir="ltr" autocomplete="off">
-    <label for="contact">وسيلة التواصل مع أ. بثينة</label>
+    <label for="tg">رابط دعوة قناة الدورة على تيليغرام</label>
+    <input type="url" id="tg" dir="ltr" autocomplete="off">
+    <label for="contact">وسيلة التواصل مع أ. بثينة <span class="opt">(اختياري، مثل رقم واتساب)</span></label>
     <input type="text" id="contact" dir="ltr" autocomplete="off">
     <p class="hint">تُحفظ هذه الإعدادات على هذا الجهاز، وتُضاف إلى كل رسالة.</p>
   </details>
@@ -344,14 +344,15 @@ $('go').addEventListener('click',async()=>{
 
 
 /* ---------- instructions message ---------- */
-const DEF_CONTACT='linkedin.com/in/bouthainah-choukair';
+const DEF_TG='https://t.me/+pHIFf79eM9E1MzM0';
 function getSet(k,d){try{return localStorage.getItem(k)||d}catch(e){return d}}
 function setSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
-$('yt').value=getSet('yt',''); $('contact').value=getSet('contact',DEF_CONTACT);
+$('yt').value=getSet('yt',''); $('contact').value=getSet('contact',''); $('tg').value=getSet('tg',DEF_TG);
+$('tg').addEventListener('change',()=>{setSet('tg',$('tg').value.trim());refreshMsg()});
 $('yt').addEventListener('change',()=>{setSet('yt',$('yt').value.trim());refreshMsg()});
 $('contact').addEventListener('change',()=>{setSet('contact',$('contact').value.trim());refreshMsg()});
 function buildMsg(name,code,g,tg){
-  const F=g==='f', yt=$('yt').value.trim(), contact=$('contact').value.trim()||DEF_CONTACT;
+  const F=g==='f', yt=$('yt').value.trim(), contact=$('contact').value.trim();
   const v=(f,m)=>F?f:m;
   const L=[];
   L.push('أهلاً وسهلاً '+name+'،');
@@ -369,20 +370,19 @@ function buildMsg(name,code,g,tg){
   L.push('');
   L.push('٥. المحاور التالية: '+v('انتقلي','انتقل')+' إلى المحور الثاني ثم الثالث ثم الرابع بالترتيب نفسه، مع الحلقة المقابلة لكل محور على اليوتيوب.');
   L.push('');
-  L.push('٦. أسئلتك وملاحظاتك: '+v('دوّني','دوّن')+' أي سؤال أو ملاحظة أو استفسار في دفتر الدورة، لنتحاور حولها جميعاً في جلسة خاصة بك وحدك.');
-  if(tg){L.push('');L.push('التسجيلات الصوتية موجودة في قناة الدورة على تيليغرام. '+v('انضمي','انضم')+' إليها من هذا الرابط الخاص بك: '+tg);}
+  L.push('٦. أسئلتك وملاحظاتك: '+v('دوّني','دوّن')+' أي سؤال أو ملاحظة أو استفسار في دفتر الدورة '+v('لتناقشيه','لتناقشه')+' عند التواصل مع أ. بثينة شقير؛ فالحوار حول كل المطلوب يكون في جلسة خاصة وحصرية لكل متدرّب.');
+  if(tg){L.push('');L.push('التسجيلات الصوتية الختامية موجودة في قناة الدورة على تيليغرام. '+v('انضمي','انضم')+' إليها من هنا:');L.push(tg);}
   L.push('');
   L.push('هذه النسخة مرخّصة باسمك (رمزها '+code+') للاستخدام الشخصي فقط، فنرجو عدم مشاركتها أو نشرها.');
   L.push('');
-  L.push('للتواصل مع أ. بثينة صلاح شقير:');
-  L.push(contact);
-  L.push('');
+  if(contact){L.push('للتواصل مع أ. بثينة صلاح شقير:');L.push(contact);L.push('');}
   L.push('مع أطيب الأمنيات برحلة واعية وهادئة.');
+  L.push('أ. بثينة صلاح شقير');
   return L.join('\n');
 }
-function refreshMsg(){ if(S.last&&!S.msgEdited) $('msg').value=buildMsg(S.last.name,S.last.code,$('gender').value,$('tg').value.trim()); }
+function refreshMsg(){ if(S.last&&!S.msgEdited) $('msg').value=buildMsg(S.last.name,S.last.code,$('gender').value,$('tg').value.trim()||DEF_TG); }
 $('msg').addEventListener('input',()=>{S.msgEdited=true});
-['gender','tg'].forEach(id=>$(id).addEventListener('input',()=>{S.msgEdited=false;refreshMsg()}));
+$('gender').addEventListener('input',()=>{S.msgEdited=false;refreshMsg()});
 async function copyMsg(){
   const t=$('msg').value;
   try{await navigator.clipboard.writeText(t);return true}catch(e){$('msg').focus();$('msg').select();try{return document.execCommand('copy')}catch(_){return false}}
