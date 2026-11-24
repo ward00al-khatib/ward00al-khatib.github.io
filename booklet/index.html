@@ -77,6 +77,8 @@ td.code,td[dir=ltr]{white-space:nowrap}
 .result{display:flex;flex-direction:column;gap:8px;margin-top:6px}
 .result textarea{width:100%;font:inherit;font-size:14px;line-height:1.75;padding:10px 12px;border-radius:6px;border:1px solid var(--rule);background:var(--panel);color:var(--ink);resize:vertical}
 .acts{display:flex;gap:10px;flex-wrap:wrap}
+.phonerow{display:flex;gap:6px}.phonerow select{flex:0 0 auto;width:auto;max-width:46%}.phonerow input{flex:1;min-width:0}
+#waTo{margin-top:4px;direction:rtl}
 .sendsteps{display:flex;flex-direction:column;gap:8px;margin-top:6px}
 .sendsteps .btn{align-self:stretch;text-align:center}
 #wa[aria-disabled=true]{opacity:.4;pointer-events:none}
@@ -117,7 +119,9 @@ a.btn{text-decoration:none;display:inline-block}
       </div>
       <div class="field pair">
         <div><label for="name">اسم الزبون</label><input type="text" id="name" placeholder="سارة أحمد" autocomplete="off"></div>
-        <div><label for="phone">رقم الهاتف</label><input type="tel" id="phone" placeholder="0944 123 456" dir="ltr" style="text-align:right" autocomplete="off"></div>
+        <div><label for="phone">رقم الهاتف</label>
+          <div class="phonerow"><select id="cc" aria-label="رمز الدولة"><option value="963">سوريا +963</option><option value="961">لبنان +961</option><option value="962">الأردن +962</option><option value="964">العراق +964</option><option value="966">السعودية +966</option><option value="971">الإمارات +971</option><option value="974">قطر +974</option><option value="965">الكويت +965</option><option value="968">عُمان +968</option><option value="973">البحرين +973</option><option value="20">مصر +20</option><option value="90">تركيا +90</option><option value="49">ألمانيا +49</option><option value="46">السويد +46</option><option value="31">هولندا +31</option><option value="33">فرنسا +33</option><option value="44">بريطانيا +44</option><option value="1">أمريكا وكندا +1</option></select><input type="tel" id="phone" placeholder="0944 123 456" dir="ltr" style="text-align:right" autocomplete="off"></div>
+          <div class="hint" id="waTo"></div></div>
       </div>
       <div class="field">
         <label for="gender">المخاطبة في رسالة التعليمات</label>
@@ -415,15 +419,27 @@ $('tplReset').addEventListener('click',()=>{
   try{localStorage.removeItem(TPL_KEY($('gender').value))}catch(e){}
   S.msgEdited=false; refreshMsg(); status('عادت الرسالة الأصلية.','ok');
 });
+// International number for WhatsApp: a number written with + or 00 keeps its own country code;
+// otherwise the leading 0 is dropped and the selected country code is added.
 function waNumber(raw){
-  let d=normPhone(raw).replace(/\D/g,'');
-  if(d.startsWith('00')) d=d.slice(2);
-  if(d.startsWith('963')) return d;
-  if(d.startsWith('0')) d=d.slice(1);
-  return d.length===9&&d.startsWith('9') ? '963'+d : d;
+  const t=normPhone(raw).trim();
+  let d=t.replace(/\D/g,'');
+  if(!d) return '';
+  if(t.startsWith('+')) return d;
+  if(d.startsWith('00')) return d.slice(2);
+  const cc=$('cc').value;
+  if(d.startsWith(cc)&&d.length>cc.length+7) return d;   // already has the country code
+  d=d.replace(/^0+/,'');
+  return cc+d;
 }
+function showWaTo(){
+  const n=waNumber($('phone').value);
+  $('waTo').textContent=n.length>=8?'رقم واتساب: +'+n:'';
+}
+$('cc').addEventListener('change',()=>{showWaTo();updateWa()});
+$('phone').addEventListener('input',showWaTo);
 function updateWa(){
-  const n=waNumber($('phone').value), ok=n.length>=11;
+  const n=waNumber($('phone').value), ok=n.length>=8;
   $('wa').href=ok?'https://wa.me/'+n+'?text='+encodeURIComponent($('msg').value):'#';
   $('wa').setAttribute('aria-disabled',ok?'false':'true');
 }
