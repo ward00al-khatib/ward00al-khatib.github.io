@@ -77,6 +77,9 @@ td.code,td[dir=ltr]{white-space:nowrap}
 .result{display:flex;flex-direction:column;gap:8px;margin-top:6px}
 .result textarea{width:100%;font:inherit;font-size:14px;line-height:1.75;padding:10px 12px;border-radius:6px;border:1px solid var(--rule);background:var(--panel);color:var(--ink);resize:vertical}
 .acts{display:flex;gap:10px;flex-wrap:wrap}
+.sendsteps{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.sendsteps .btn{align-self:stretch;text-align:center}
+#wa[aria-disabled=true]{opacity:.4;pointer-events:none}
 .opt{font-weight:400;color:var(--muted);font-size:12.5px}
 .hint{font-size:12.5px;color:var(--muted);margin:0}
 select{width:100%;font:inherit;padding:9px 11px;border-radius:6px;border:1px solid var(--rule);background:var(--bg);color:var(--ink)}
@@ -131,12 +134,20 @@ a.btn{text-decoration:none;display:inline-block}
         <div class="result" id="result" hidden>
           <label for="msg">رسالة التعليمات للزبون <span class="opt">(يمكنك تعديلها قبل الإرسال)</span></label>
           <textarea id="msg" rows="14"></textarea>
-          <div class="acts">
-            <button class="btn" id="share" type="button" hidden>إرسال الملف مع الرسالة</button>
-            <button class="btn alt" id="copy" type="button">نسخ الرسالة</button>
-            <a class="btn alt" id="dl" download>تنزيل الملف فقط</a>
+          <div class="acts" id="tplActs">
+            <button class="btn alt small" id="tplSave" type="button" hidden>حفظ التعديل لكل الرسائل القادمة</button>
+            <button class="btn alt small" id="tplReset" type="button" hidden>استرجاع الرسالة الأصلية</button>
           </div>
-          <p class="hint" id="shareHint">واتساب يرسل الملف أحياناً دون النص المرافق، لذلك تُنسخ الرسالة تلقائياً عند الإرسال؛ إن لم تظهر، الصقيها في المحادثة.</p>
+          <p class="hint" id="tplNote" hidden></p>
+          <div class="sendsteps">
+            <a class="btn" id="wa" href="#" target="_blank" rel="noopener">١. إرسال الرسالة على واتساب الزبون</a>
+            <button class="btn" id="share" type="button" hidden>٢. إرسال الملف</button>
+          </div>
+          <p class="hint" id="shareHint">الخطوة الأولى تفتح محادثة الزبون على رقمه مباشرة والرسالة مكتوبة، فاضغطي «إرسال». ثم عودي واضغطي الخطوة الثانية واختاري المحادثة نفسها (تكون أول القائمة) لإرسال الملف.</p>
+          <div class="acts">
+            <button class="btn alt small" id="copy" type="button">نسخ الرسالة (لتيليغرام وغيره)</button>
+            <a class="btn alt small" id="dl" download>تنزيل الملف</a>
+          </div>
         </div>
       </div>
     </section>
@@ -380,20 +391,51 @@ function buildMsg(name,code,g,tg){
   L.push('أ. بثينة صلاح شقير');
   return L.join('\n');
 }
-function refreshMsg(){ if(S.last&&!S.msgEdited) $('msg').value=buildMsg(S.last.name,S.last.code,$('gender').value,$('tg').value.trim()||DEF_TG); }
-$('msg').addEventListener('input',()=>{S.msgEdited=true});
+const TPL_KEY=g=>'msgTpl_'+g;
+function savedTpl(g){return getSet(TPL_KEY(g),'')}
+function fillTpl(t,name,code){return t.split('{الاسم}').join(name).split('{الرمز}').join(code)}
+function refreshMsg(){
+  if(!S.last) return;
+  const g=$('gender').value, t=savedTpl(g);
+  if(!S.msgEdited) $('msg').value=t?fillTpl(t,S.last.name,S.last.code):buildMsg(S.last.name,S.last.code,g,$('tg').value.trim()||DEF_TG);
+  $('tplSave').hidden=!S.msgEdited;
+  $('tplReset').hidden=!t;
+  $('tplNote').hidden=!t; $('tplNote').textContent=t?'تُستخدم رسالتك المعدّلة ('+(g==='f'?'صيغة المؤنث':'صيغة المذكّر')+') لكل النسخ القادمة على هذا الجهاز.':'';
+  updateWa();
+}
+$('msg').addEventListener('input',()=>{S.msgEdited=true;$('tplSave').hidden=false;updateWa()});
 $('gender').addEventListener('input',()=>{S.msgEdited=false;refreshMsg()});
+$('tplSave').addEventListener('click',()=>{
+  if(!S.last) return;
+  const t=$('msg').value.split(S.last.name).join('{الاسم}').split(S.last.code).join('{الرمز}');
+  setSet(TPL_KEY($('gender').value),t); S.msgEdited=false; refreshMsg();
+  status('حُفظت الرسالة المعدّلة، وستُستخدم مع كل زبون جديد (يتغيّر فيها الاسم والرمز تلقائياً).','ok');
+});
+$('tplReset').addEventListener('click',()=>{
+  try{localStorage.removeItem(TPL_KEY($('gender').value))}catch(e){}
+  S.msgEdited=false; refreshMsg(); status('عادت الرسالة الأصلية.','ok');
+});
+function waNumber(raw){
+  let d=normPhone(raw).replace(/\D/g,'');
+  if(d.startsWith('00')) d=d.slice(2);
+  if(d.startsWith('963')) return d;
+  if(d.startsWith('0')) d=d.slice(1);
+  return d.length===9&&d.startsWith('9') ? '963'+d : d;
+}
+function updateWa(){
+  const n=waNumber($('phone').value), ok=n.length>=11;
+  $('wa').href=ok?'https://wa.me/'+n+'?text='+encodeURIComponent($('msg').value):'#';
+  $('wa').setAttribute('aria-disabled',ok?'false':'true');
+}
+$('wa').addEventListener('click',()=>{copyMsg();status('فُتحت محادثة الزبون على واتساب. بعد إرسال الرسالة، أرسلي الملف من الخطوة الثانية.','ok')});
 async function copyMsg(){
   const t=$('msg').value;
   try{await navigator.clipboard.writeText(t);return true}catch(e){$('msg').focus();$('msg').select();try{return document.execCommand('copy')}catch(_){return false}}
 }
 $('copy').addEventListener('click',async()=>{status(await copyMsg()?'نُسخت الرسالة.':'حدّدي النص وانسخيه يدوياً.',  'ok')});
 $('share').addEventListener('click',async()=>{
-  const text=$('msg').value; await copyMsg();
-  try{await navigator.share({files:[S.file],text,title:S.file.name})}
-  catch(e){ if(e&&e.name==='AbortError') return;
-    try{await navigator.share({files:[S.file],title:S.file.name});status('أُرسل الملف. الرسالة منسوخة، الصقيها في المحادثة.','ok')}
-    catch(e2){if(e2&&e2.name!=='AbortError')status('تعذّر فتح المشاركة. نزّلي الملف وأرسليه، والرسالة منسوخة.','err')}}
+  try{await navigator.share({files:[S.file],title:S.file.name})}
+  catch(e){if(e&&e.name!=='AbortError')status('تعذّر فتح المشاركة. نزّلي الملف وأرسليه من المحادثة.','err')}
 });
 ['name','phone'].forEach(id=>$(id).addEventListener('input',()=>{$('result').hidden=true;S.last=null}));
 $('exp').addEventListener('click',()=>{
